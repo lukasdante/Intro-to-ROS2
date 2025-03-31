@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <title>Robotics - Week 0</title>
+</head>
+<body>
+    <div class="left-panel">
+        <div class="left-block-panel">
+            <div class="main-title">Introduction to the <br>Robot Operating System 2</div>
+            <div class="distro-title">Humble Hawksbill</div>
+        </div>
+        
+        <div class="left-block-panel">
+            <div class="author-name">John Louis D. Lagramada</div>
+            <div class="author-email"><a href="mailto:johnlouis.dante@gmail.com">johnlouis.dante@gmail.com</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="course"><a href="week0.html"><span class="course-week-no">Week 0 </span>Gearing Up</a></div>
+            <div class="course"><a href="week1.html"><span class="course-week-no">Week 1 </span>Introduction to ROS 2</a></div>
+            <div class="course"><a href="week2.html"><span class="course-week-no">Week 2 </span>Object-Oriented Programming</a></div>
+            <div class="course"><a href="week3.html"><span class="course-week-no">Week 3 </span>Nodes, Messages, and Topics</a></div>
+            <div class="course"><a href="week4.html"><span class="course-week-no">Week 4 </span>Parameters</a></div>
+            <div class="course"><a href="week5.html"><span class="course-week-no">Week 5 </span>Custom Launch</a></div>
+            <div class="course"><a href="week6.html"><span class="course-week-no">Week 6 </span>Common ROS 2 Packages</a></div>
+            <div class="course"><a href="week7.html"><span class="course-week-no">Week 7 </span>Services</a></div>
+            <div class="course"><a href="week8.html"><span class="course-week-no">Week 8 </span>Actions</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="submissions">Submissions</div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="final-project">Final Project</div>
+            <div class="final-project-gallery">Gallery of Final Projects</div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="references">References</div>
+            <div class="license">Licenses</div>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="right-block-panel">
+            <div class="content-header">
+                <div class="content-title">Gearing Up</div>
+                <div class="content-author">Written by: Nicamae G. Tamundong and John Louis D. Lagramada</div>
+                <hr class="content-divider">
+                <div class="content-intro">This section provides the necessary prerequisites in performing the hands-on demonstrations and laboratories in the next few modules.</div>    
+            </div>
+       </div>
+        <div class="right-block-panel">
+            <div class="content-content">
+                <div class="content-h2">Installing Ubuntu 22.04</div>
+                <div class="content-division">
+                    <div class="content-division-title">Minimum Requirements for Installing Ubuntu 22.04</div>
+                    <div class="content-division-content">
+                        <ul>
+                            <li>RAM: 4GB RAM</li>
+                            <li>25 GB Free Disk Space</li>
+                            <li>CPU: 2 Cores</li>
+                            <li>Ubuntu ISO image</li>
+                            <li>VirtualBox with Extension Pack</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">How to install VirtualBox?</div>
+                    <div class="content-division-content">
+                        <ol>
+                            <li>Click <a href="https://www.virtualbox.org/wiki/Downloads">here</a> and you will be routed to this page:
+                                <img class="screenshot" src="../assets/img/asset_011.png" alt="">
+                            </li>
+                            <li>To download, click the host operating system that you have in the VirtualBox Platform Packages section (lower left).
+                                <img src="../assets/img/asset_012.png" alt="" class="screenshot">
+                            </li>
+                            <li>After successfully downloading VirtualBox, in Windows, proceed to the installation by clicking the downloaded file and click next.
+                                <img src="../assets/img/asset_013.png" alt="" class="screenshot">
+                            </li>
+                            <li>Click "I accept the terms in the License Agreement.
+                                <img src="../assets/img/asset_014.png" alt="" class="screenshot">
+                            </li>
+                            <li>Just follow the default configurations by doing nothing and click next.
+                                <img src="../assets/img/asset_015.png" alt="" class="screenshot">
+                            </li>
+                            <li>If prompted with a warning like below, just click Yes.
+                                <img src="../assets/img/asset_016.png" alt="" class="screenshot">
+                            </li>
+                            <li>If prompted with missing dependencies like below, click Yes.
+                                <img src="../assets/img/asset_017.png" alt="" class="screenshot">
+                            </li>
+                            <li>Click install. You successfully installed VirtualBox.
+                                <img src="../assets/img/asset_018.png" alt="" class="screenshot">
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">How to install Ubuntu 22.04?</div>
+                    <div class="content-division-content">
+                        <ol>
+                            <li>Click the link <a href="https://www.releases.ubuntu.com/22.04/">here</a> and you will be routed into this page where you will select and download Desktop Image ISO File. Once in the page, click <em><code class="inline-code-normal">64-bit PC (AMD64) desktop image</code></em>.
+                                <img src="../assets/img/asset_021.png" alt="" class="screenshot">
+                            </li>
+                            <li>After downloading the ISO file, you may now open your VirtualBox and click New.
+                                <img src="../assets/img/asset_022.png" alt="" class="screenshot">
+                            </li>
+                            <li>You may now be able to see this on your end:
+                                <img src="../assets/img/asset_023.png" alt="" class="screenshot">
+                            </li>
+                            <li>Input the name <code class="inline-code-normal">Ubuntu 22.04</code> for easy navigation and make sure you choose the folder where you have enough space.
+                                <img src="../assets/img/asset_024.png" alt="" class="screenshot">
+                            </li>
+                            <li>In ISO Image just click <code class="inline-code-normal">Other…</code> and locate your ISO file.
+                                <img src="../assets/img/asset_025.png" alt="" class="screenshot">
+                            </li>
+                            <li>This is how it should look before proceeding into the Unattended Install.
+                                <img src="../assets/img/asset_026.png" alt="" class="screenshot">
+                            </li>
+                            <li>In this section you may now change the username and password.
+                                <img src="../assets/img/asset_027.png" alt="" class="screenshot">
+                            </li>
+                            <li>On this screen, you can specify how much RAM the virtual machine should get and also the number of processors. Keep in mind that as you allocate memory to your virtual machine, this will take it away from the host machine. That is why you see it orange and red up near the top. Do not worry about this as you can change it based on what you need anytime you want, as per now I want mine to take space like what is shown below.
+                                <img src="../assets/img/asset_028.png" alt="" class="screenshot">
+                            </li>
+                            <li>This part allows you to specify how much hard disk space you want for your VirtualMachine. It is recommended to click the Pre-allocate Full Size.
+                                <img src="../assets/img/asset_029a.png" alt="" class="screenshot">
+                                Now, click Finish.
+                                <img src="../assets/img/asset_029b.png" alt="" class="screenshot">   
+                                Wait until the virtual machine has finished installing. Once it is done, your window should resemble the image below.
+                                <img src="../assets/img/asset_029c.png" alt="" class="screenshot"> 
+                            </li>
+                            <li>If you encounter this error just restart your device and re-open your Virtual Machine.
+                                <img src="../assets/img/asset_0210.png" alt="" class="screenshot"> 
+                            </li>
+                            <li>Now open your Ubuntu 22.04 by clicking Start.
+                                <img src="../assets/img/asset_0211.png" alt="" class="screenshot"> 
+                            </li>
+                            <li>Your screen should look like this, now fill the necessary details for your log in.
+                                <img src="../assets/img/asset_0212a.png" alt="" class="screenshot"> 
+                            </li>
+                            <li>All you can do now is to wait for it to be fully downloaded.
+                                <img src="../assets/img/asset_0212b.png" alt="" class="screenshot"> 
+                            </li>
+                            <li><strong>Congrats! &#127881;</strong> You’re now ready to explore Ubuntu!  If the installation was tricky, feel free to ask—but hey, YouTube’s always there too! Now go have fun and create something awesome! 
+                                <img src="../assets/img/asset_0212c.png" alt="" class="screenshot"> 
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">How to install Visual Studio Code?</div>
+                    <div class="content-division-content">
+                        <ol>
+                            <li>Click the link <a href="https://code.visualstudio.com/download">here</a> and you will be routed into this page:
+                                <img src="../assets/img/asset_031.png" class="screenshot" alt="">
+                            </li>
+                            <li>Download the Debian package with a .deb extension.</li>
+                            <li>Open a terminal and type the below to install VS Code.
+                                <pre><code class="language-bash">cd ~/Downloads && sudo dpkg -i *.deb</code></pre>
+                            </li>
+                            <li>While installing, this window may appear just click ENTER at Yes.
+                                <img src="../assets/img/asset_032.png" class="screenshot" alt="">
+                            </li>
+                            <li>Type <code class="inline-code-normal">code</code> in a new terminal. Visual Studio Code must appear if it is properly installed.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Installing ROS 2 Humble</div>
+
+                <div class="content-division">
+                    <div class="content-division-title">How to install ROS 2 Humble?</div>
+                    <div class="content-division-content">
+                        The following installation instructions assume that you are using an x86_64 laptop or computer with Ubuntu 22.04 (Jammy Jellyfish). You can use virtual machines like VirtualBox or QEMU if you are using a different operating system. Installing with other Linux distributions has not been tested yet. Make sure you also have a stable installation of Python 3 and Git. Most of the code here follows the ROS 2 Humble Hawksbill documentation. The installation includes ROS 2, rqt, colcon, and all the other necessary packages or libraries you may need in completing this course.
+                        <span class="boldtext">Tip:</span> Type CTRL + ALT + T to open a terminal or CTRL + SHIFT + T to add a new terminal tab. You need a terminal to run the code below.
+                        <ol>
+                            <li>Set locale.
+    <div class="code-container">
+        <pre><code class="language-bash">locale  # check for UTF-8
+    sudo apt update && sudo apt install locales
+    sudo locale-gen en_US en_US.UTF-8
+    sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+    export LANG=en_US.UTF-8
+    locale  # verify settings</code></pre>  
+    </div>                         
+                            </li>
+    
+                            <li>If the error <code class="inline-code-error">user is not in sudoers file</code> appeared, perform the code below.
+                            <pre><code class="language-bash">su root</code></pre>
+                            Provide your password then the terminal will show a different prompt like <code class="inline-code-normal">root@user:/home/user</code>.
+                            <pre><code class="language-bash">nano /etc/sudoers</code></pre>
+                            Add your username to the sudoers file be. Change the username user to the username you used during installation.
+                            <pre><code class="language-bash">user	ALL=(ALL) ALL</code></pre>
+                            Your terminal should look like the one below, replace user with the proper username. To save, type CTRL + O then ENTER, it should be saved by now. Exit with CTRL + X. Type exit to leave root.
+                            <img src="../assets/img/asset_041.png" alt="" class="screenshot small">
+                            </li>
+    
+                            <li>
+                                Setup sources
+    <pre><code class="language-bash">sudo apt install software-properties-common
+    sudo add-apt-repository universe
+    sudo apt update && sudo apt install curl -y
+                                    
+    sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+                                    
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null</code></pre>
+                            </li>
+    
+                            <li>
+                                Install ROS 2 Humble.
+    <pre><code class="language-bash">sudo apt update
+    sudo apt upgrade
+    sudo apt install ros-humble-desktop
+    sudo apt install '~nros-humble-rqt*'
+    sudo apt install python3-colcon-common-extensions
+    sudo apt install python3-rosdep2
+    sudo apt install git
+    rosdep update
+    echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc</code></pre>
+                            </li>
+    
+                            <li>Verify installation. Open a terminal and run this code.
+                                <pre><code class="language-bash">ros2 run demo_nodes_py talker</code></pre>
+                                Open a different terminal and run this code.
+                                <pre><code class="language-bash">ros2 run demo_nodes_py listener</code></pre>
+                            </li>
+                            
+                        </ol>
+                        Congrats! &#127881; If the installation is successful, you should see the same messages being printed on both terminals. The talker node is publishing those messages to the listener node.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

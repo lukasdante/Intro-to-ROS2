@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <title>Robotics - Week 1</title>
+</head>
+<body>
+    <div class="left-panel">
+        <div class="left-block-panel">
+            <div class="main-title">Introduction to the <br>Robot Operating System 2</div>
+            <div class="distro-title">Humble Hawksbill</div>
+        </div>
+        
+        <div class="left-block-panel">
+            <div class="author-name">John Louis D. Lagramada</div>
+            <div class="author-email"><a href="mailto:johnlouis.dante@gmail.com">johnlouis.dante@gmail.com</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="course"><a href="week0.html"><span class="course-week-no">Week 0 </span>Gearing Up</a></div>
+            <div class="course"><a href="week1.html"><span class="course-week-no">Week 1 </span>Introduction to ROS 2</a></div>
+            <div class="course"><a href="week2.html"><span class="course-week-no">Week 2 </span>Object-Oriented Programming</a></div>
+            <div class="course"><a href="week3.html"><span class="course-week-no">Week 3 </span>Nodes, Messages, and Topics</a></div>
+            <div class="course"><a href="week4.html"><span class="course-week-no">Week 4 </span>Parameters</a></div>
+            <div class="course"><a href="week5.html"><span class="course-week-no">Week 5 </span>Custom Launch</a></div>
+            <div class="course"><a href="week6.html"><span class="course-week-no">Week 6 </span>Common ROS 2 Packages</a></div>
+            <div class="course"><a href="week7.html"><span class="course-week-no">Week 7 </span>Services</a></div>
+            <div class="course"><a href="week8.html"><span class="course-week-no">Week 8 </span>Actions</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="submissions">Submissions</div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="final-project">Final Project</div>
+            <div class="final-project-gallery">Gallery of Final Projects</div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="references">References</div>
+            <div class="license">Licenses</div>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="right-block-panel">
+            <div class="content-header">
+                <div class="content-title">Introduction to ROS 2</div>
+                <div class="content-author">Written by: John Louis D. Lagramada</div>
+                <hr class="content-divider">
+                <div class="content-intro">This section tackles the introduction to ROS 2, its history, and how workspaces and packages are created.</div>
+            </div>
+            <div class="content-content">
+                <div class="content-division">
+                    <div class="content-h2">Objectives</div>
+                    <ul>
+                        <li>Learners will be able to understand core ROS 2 foundational concepts.</li>
+                        <li>Learners will be able to build a ROS 2 workspace using <code class="inline-code-normal">colcon</code>.</li>
+                        <li>Learners will be able to build ROS 2 packages in <code class="inline-code-normal">ament_cmake</code> and <code class="inline-code-normal">ament_python</code> build types and differentiate among them.</li>
+                    </ul>
+                </div>
+                <div class="content-division">
+                    <div class="content-h2">Concepts</div>
+                    <div class="concept">
+                        <div class="concept-title">The Robot Operating System</div>
+                        The Robot Operating System or ROS is a robotics middleware platform consisting of multiple frameworks, libraries, and tools enabling robotics software development. It is open-source with a large suite of open-source packages such as MoveIt for motion planning, RViz for visualization, and Gazebo for 3D simulations. ROS is not a real operating system but it has different distributions analogous to real operating systems. Windows, an operating system, released versions such as Windows XP and Windows 10. The premise with these releases is an improvement of the previous released distributions. The same premise applies to ROS where in a span of 23 distributions, ROS developers aimed continuous improvement in accessibility, security, and efficiency, to name a few.
+                    </div>
+                    <div class="concept">
+                        <div class="concept-title">ROS and ROS 2</div>
+                        We’ve talked about ROS in general, however, ROS actually comes in two different versions – ROS and ROS 2. Willow Garage developed ROS (1) on March 2, 2010, releasing the first distribution called Box Turtle. The advent of ROS became popular among roboticists, until 10 years later, the last ROS (1) distribution – ROS Noetic Ninjemys – was released. Time flies, ROS Noetic is nearing its end-of-life (EOL) in the year this module is published. When a software reaches EOL, support and further development for the distribution is stopped. ROS (1) will reach complete EOL on May 23, 2025, the same day ROS Noetic reaches EOL.
+                        <br><br>
+                        This doesn’t mean that the entire open-source robotics software development is a dead industry. In fact, a better version of ROS called ROS 2 was released. ROS 2 improves many aspects of ROS, these improvements are summarized in Figure 1.1. In this module, we refer to ROS 2 as simply ROS to avoid confusion, specifically the Humble Hawksbill distribution. ROS Humble is a long-term support (LTS) distribution that is supported by modern packages such as Isaac ROS and Isaac Sim ROS bridge which bridges robotics and artificial intelligence (AI). These are advanced topics that are not covered in this module but it is worth noting.
+                    </div>
+                    <div class="concept">
+                        <div class="concept-title">Client Libraries</div>
+                        ROS Client Library or rcl allows all ROS core functionalities to run in different programming languages. ROS Humble has stable support for C++ (rclcpp) and Python (rclpy) but you can program in different languages or frameworks that are supported by the community such as Node.js, Rust, and Flutter. ROS provides wrappers for these programming languages that wrap around the core rcl library. The rcl library is implemented in C because most languages are compatible and precedes from C. Therefore, it is possible to implement ROS in different programming languages because the client library shares functionalities such as namespaces, time, and parameter server. 
+                        <br><br>
+                        We will focus on rclpy in this course due to Python’s simplicity. Its simplicity, however, comes with a tradeoff with efficiency. Python is a dynamically typed language which is prone to errors especially when declaring parameters. We will also touch rclcpp from time to time to develop interfaces using rosidl client library. This allows us to create custom messages, services, and actions which are core ROS components that we will go through in this course.
+                    </div>
+                    <div class="concept">
+                        <div class="concept-title">Workspaces</div>
+                        Workspaces in ROS 2 are environments that allow developers to build different robotics applications. With workspaces, we can build using different distributions of ROS 2 or even with different versions of packages using the same device. These workspaces can be booted up by simply sourcing the setup files that are built during the creation of the workspace. We handled sourcing the underlay workspace during the installation by appending it to the startup bash script. An underlay workspace is the core ROS 2 workspace which includes all the packages that are installed during installation.
+                        <br><br>
+                        An overlay workspace is a workspace that you build on top of the underlay workspace. We can easily build overlay workspaces using colcon. The importance of overlay workspace is highlighted whenever you want to build projects, e.g. a robot arm, an autonomous moving robot, or an IoT system. It essentially allows you to separate the tables in your laboratory such that the tools or resources you use for different projects do not get mixed up with the others.
+                        <br><br>
+                        Once you build a workspace using colcon, it will generate three (3) folders. A build folder where all the intermediate files are located which are essential for the building the workspace and the packages. An install folder where all the packages are installed so that you can use it in your applications. Lastly, a log folder that stores all the logging information whenever colcon is called. A src folder should be created alongside these folders as well where all the code will be written. You don’t want to delete any of these folders as they are essential in running your ROS 2 workspace.
+                    </div>
+                    <div class="concept">
+                        <div class="concept-title">Packages</div>
+                        The organizational units of code in ROS 2 are packages. Packages allow developers to share and collaborate their work with other developers. Packages, like workspaces, allow you to organize your code into different modular components. The packages are built using ament which supports CMake and Python build types using ament_cmake and ament_python, respectively. The different build types and their corresponding language support and use-cases are summarized in Figure 1.2.
+                    </div>
+
+                    For deeper understanding of each package build type including the minimum required contents and file structure refer to the ROS 2 Humble documentation.
+                </div>
+                <div class="content-division">
+                    <div class="content-h2">Programming</div>
+                    <div class="concept">
+                        <div class="concept-title">Creating a ROS 2 Workspace</div>
+                        On top of your underlay workspace, we can create an overlay workspace which you can freely use for development and testing. When locating packages, ROS 2 finds all the packages that are sourced in your environment and this almost always includes the underlay workspace. This happens because we already automatically source the underlay workspace every time we open the terminal in the installation process with this line of code echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc. 
+                        </br><br>
+                        You should already have Git installed in your system to proceed with the tutorial. Otherwise, you can simply download the source code from the provided git repository. Let’s proceed on creating the overlay workspace.
+                        <br><br>
+                        <ol>
+                            <li>Create a new directory.
+                                <pre><code class="language-bash">mkdir -p ~/ros2_ws/src
+    cd ~/ros2_ws/src</code></pre>
+                            </li>
+                            <li>Clone a sample repository.
+                                <pre><code class="language-bash">git clone https://github.com/ros/ros_tutorials.git -b humble</code></pre>
+                            </li>
+                            <li>Resolve dependencies.
+                                <pre><code class="language-bash">cd .. # you should be in ros2_ws
+    rosdep install -i --from-path src --rosdistro humble -y</code></pre>
+                            </li>
+                            <li>Build the workspace with <code class="inline-code-normal">colcon</code>.
+                                <pre><code class="language-bash">colcon build --symlink-install --packages-select turtlesim</code></pre>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="concept">
+                        <div class="concept-title">Creating a ROS 2 Package in Python</div>
+                        Make sure you already have built a workspace and you are in the src directory. If you’re not yet, type this in the terminal: <code class="inline-code-normal">cd ~/ros2_ws/src/</code>.
+                        <br><br>
+                        <ol>
+                            <li>Create a ROS 2 Python package.
+                                <pre><code class="language-bash">ros2 pkg create --build-type ament_python --node-name my_node my_package</code></pre>
+                                The <code class="inline-code-normal">--build-type</code> option allows you to change the type of package you want to create. The <code class="inline-code-normal">--node-name</code> option allows you to create a node with name my_node under the my_package package. Don’t worry about what nodes are for now. You can change the build type to <code class="inline-code-normal">ament_cmake</code> to create a CMake package. Check the ROS 2 Humble documentation to know more about the differences in the contents and file structure.
+                                <br><br>
+                            </li>
+                            <li>Build the ROS 2 Python package.<br><br>
+                                Be reminded that you shouldn’t be in src but in your workspace whenever you build with colcon.
+                                <pre><code class="language-bash">cd ~/ros2_ws
+colcon build --packages-select my_package --symlink-install</code></pre>
+
+                                The <code class="inline-code-normal">--packages-select</code> option allows you to build only certain packages. Without that option, all the packages will be reinstalled by default. The <code class="inline-code-normal">--symlink-install</code>  option automatically updates the packages whenever there are changes in the scripts.
+                                <br><br>
+                            </li>
+                            <li>Sourcing the setup file.
+                                <pre><code class="language-bash">source install/local_setup.bash</code></pre>
+
+                            </li>
+                            <li>Using the package.
+                                <pre><code class="language-bash">ros2 run my_package my_node</code></pre>
+                            </li>
+                            <li>Customizing <code class="inline-code-normal">package.xml</code>.<br><br>
+                                You will see a package.xml after building the package. From there you can modify metadata about your package including the description, maintainer, and license. You can also see dependencies in the same XML file. You can check the ROS 2 documentation of how these tags are used for defining dependencies. For now, modify the package.xml file and write your name as the maintainer, browse open licenses and write it to the license tag, and add a description. The package.xml should look like this:
+                            
+                                <pre><code class="language-xml">&lt;?xml version="1.0"?&gt;
+&lt;?xml-model
+   href="http://download.ros.org/schema/package_format3.xsd"
+   schematypens="http://www.w3.org/2001/XMLSchema"?&gt;
+&lt;package format="3"&gt;
+ &lt;name&gt;my_package&lt;/name&gt;
+ &lt;version&gt;0.0.0&lt;/version&gt;
+ &lt;description&gt;TODO: Package description&lt;/description&gt;
+ &lt;maintainer email="user@todo.todo"&gt;user&lt;/maintainer&gt;
+ &lt;license&gt;TODO: License declaration&lt;/license&gt;
+
+ &lt;test_depend&gt;ament_copyright&lt;/test_depend&gt;
+ &lt;test_depend&gt;ament_flake8&lt;/test_depend&gt;
+ &lt;test_depend&gt;ament_pep257&lt;/test_depend&gt;
+ &lt;test_depend&gt;python3-pytest&lt;/test_depend&gt;
+
+ &lt;export&gt;
+   &lt;build_type&gt;ament_python&lt;/build_type&gt;
+ &lt;/export&gt;
+&lt;/package&gt;</code></pre>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="content-h2">Deeper Look at Nabi</div>
+                    We used a single workspace in housing the entire codebase for the robot arm called <code class="inline-code-normal">arctos_ws</code>. We separated the packages Provided below is the "tree" directory or the file structure of the codebase of Nabi robot arm.<br><br>
+                    
+                    <div class="concept">
+                        This is the file directory tree of a usual ROS 2 workspace.
+                        <pre><code class="language-bash">arctos_ws
+    ├── build
+    ├── install
+    ├── log
+    └── src </code></pre>
+    
+                        This is the file directory tree of the <code class="inline-code-normal">src</code> directory. This shows how different modular pieces of code are separated as packages. Essentially, we can use and share individual packages as long as there isn't dependencies among them. In an attempt to make a cleaner code, we created an interface package which houses all the custom interfaces to promote code reusability.
+                        <pre><code class="language-bash">src/
+    ├── aiagent
+    ├── cancontrol
+    ├── interfaces
+    ├── tests
+    ├── utils
+    └── vision</code></pre>
+                        Let's look deeper at an individual package called <code class="inline-code-normal">aiagent</code>. You can see here that a directory of the same name is created inside it which is the package itself. We'll talk about launch files in the future. You can also see other boilerplate or default files when creating ROS 2 packages here like package.xml and setup.py.
+                        <pre><code class="language-bash">aiagent/
+    ├── aiagent
+    │   ├── agents.py
+    │   ├── __init__.py
+    │   ├── recorder.py
+    │   ├── talker.py
+    │   └── writer.py
+    ├── launch
+    │   ├── audio_launch.py
+    │   └── main_launch.py
+    ├── package.xml
+    ├── resource
+    │   └── aiagent
+    ├── setup.cfg
+    ├── setup.py
+    └── test
+        ├── test_copyright.py
+        ├── test_flake8.py
+        └── test_pep257.py </code></pre> 
+                    </div>
+                    <div class="content-h2">Assignment</div>
+                    <div class="content">
+                        <ol>
+                            <li>
+                                Create a workspace with your surname as the workspace name.
+                            </li>
+                            <li>
+                                Create a package with ament_python build type.
+                            </li>
+                            <li>
+                                Create a package with ament_cmake build type.
+                            </li>
+                            <li>
+                                Change the package.xml file for both builds and change the necessary metadata.
+                            </li>
+                            <li>
+                                Commit it to GitHub with the message “A1 built workspace and packages” then push. Make sure you only have a single branch.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

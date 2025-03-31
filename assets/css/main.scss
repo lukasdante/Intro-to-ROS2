@@ -1,0 +1,138 @@
+@import './vars', './functions';
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: $main-color-text;
+    font-size: 1.01em;
+    line-height: 1.5rem;
+}
+
+
+body {
+    display: flex;
+    color: $main-color-text;
+    font-family: $main-font-style, sans-serif;
+}
+
+a {
+    color: $main-color-links;
+}
+
+ul, ol {
+    padding-left: 40px;
+}
+
+.left-panel {
+    background-color: $left-panel-background;
+    height: 100vh;
+    width: 25vw;
+    max-width: 400px;
+    overflow-y: scroll;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+
+    .left-panel-divider {
+        width: 90%;
+        display: block;
+        border: 0;
+        margin: auto;
+        border-top: 1px solid $line-color;
+    }
+
+    .left-block-panel {
+        margin: 25px;
+
+        .main-title {
+            font-size: 1.25em;
+            line-height: 1em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .author-name {
+            font-weight: 600;
+        }
+
+        .course {
+            color: $main-color-links;
+            line-height: 1.75em;
+            a {
+                text-decoration: none;
+            }
+            .course-week-no {
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+.right-panel {
+    background-color: $right-panel-background;
+    height: 100vh;
+    min-width: 75vw;
+    max-width: calc(100vw - 400px);
+    overflow-y: scroll;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+
+    .content-divider {
+        border-top: 1px solid $content-line-color;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        
+    }
+
+    .content-author {
+        margin-top: 20px;
+    }
+
+    .right-block-panel:first-child {
+        margin-top: 30px;
+    }
+
+    .right-block-panel:last-child {
+        margin-bottom: 200px;
+    }
+
+    .right-block-panel {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        .content-title {
+            font-size: calc(1.325rem + .9vw);
+            font-weight: 600;
+        }
+
+        .content-content {
+            line-height: 1.5em;
+
+            .content-h2 {
+                font-size: calc(1rem + .5vw);
+                font-weight: 600;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }            
+
+            .content-division {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                    .content-division-title {
+                        font-weight: 800;
+                        margin-bottom: 10px;
+                    }
+                }
+                
+            }
+        }
+    }
+
+.boldtext {
+    font-weight: 600;
+}
+
+li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

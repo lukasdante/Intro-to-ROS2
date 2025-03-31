@@ -1,0 +1,50 @@
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #3a3a3a; /* background of the scrollbar track */
+}
+::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 10px;
+    border: 2px solid #3a3a3a; /* matches track to give thumb padding */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #888;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+.screenshot {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    max-width: 600px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+code {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.inline-code-error {
+    color: #e44;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: $codeblock-color-background;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.inline-code-normal {
+    color: white;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: $codeblock-color-background;
+    padding: 5px;
+    border-radius: 5px;
+}
