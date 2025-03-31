@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-    <title>Robotics - Week 2</title>
+    <title>Robotics - Week 1</title>
 </head>
 <body>
     <div class="left-panel">
@@ -57,25 +57,24 @@
                 <hr class="content-divider">
                 <div class="content-intro">This section tackles an introduction to object-oriented programming paradigm and its four pillars - encapsulation, abstraction, polymorphism, and inheritance.</div>
             </div>
-            
             <div class="content-content">
+                <div class="content-h2">Objectives</div>
                 <div class="content-division">
-                    <div class="content-h2">Objectives</div>
                     <ul>
                         <li>Learners will be able to define object-oriented programming and its four key principles – encapsulation, abstraction, polymorphism, and inheritance.</li>
                         <li>Learners will be able to program classes in Python.</li>
                         <li>Learners will demonstrate encapsulation, abstraction, polymorphism, and inheritance in Python.</li>
                     </ul>
                 </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Concepts</div>
                 <div class="content-division">
-                    <div class="content-h2">Concepts</div>
-                    <div class="concept">
-                        <div class="concept-title">Object-Oriented Programming</div>
-                        Object-oriented programming (OOP) is a programming paradigm wherein data and functions are tied together, forming objects. This paradigm is evolutionary intuitive because humans typically view the world as a composition of different objects. ROS 2 mainly employs OOP in creating modular components. Classes are the templates of these objects, like a cookie cutter or a molder, that allows you to create several objects of different attributes and behaviors.
-                        <br><br>
-                        What sets OOP different from procedural or structured programming is that these attributes and behaviors are tied locally in an object. In procedural programming, the data are being processed in global functions or routines. Some may argue that there isn’t even a global variable or function when it comes to OOP but only local abstract functions found in each class. Attributes are values that can be associated with an object while a method is a function that an object can perform. Figure 2.1 shows a Python code snippet for creating classes and objects.
-                        <br><br>
-                        <pre><code class="language-bash">class Vehicle: # class name: Vehicle
+                    <div class="content-division-title">Object-Oriented Programming</div>
+                    <div class="content-division-content">Object-oriented programming (OOP) is a programming paradigm wherein data and functions are tied together, forming objects. This paradigm is evolutionary intuitive because humans typically view the world as a composition of different objects. ROS 2 mainly employs OOP in creating modular components. Classes are the templates of these objects, like a cookie cutter or a molder, that allows you to create several objects of different attributes and behaviors.                    </div>
+                    <div class="content-division-content">What sets OOP different from procedural or structured programming is that these attributes and behaviors are tied locally in an object. In procedural programming, the data are being processed in global functions or routines. Some may argue that there isn’t even a global variable or function when it comes to OOP but only local abstract functions found in each class. Attributes are values that can be associated with an object while a method is a function that an object can perform. The figure below shows a Python code snippet for creating classes and objects.</div>
+                    <div class="content-division-content">
+                        <pre><code class="language-python">class Vehicle: # class name: Vehicle
     # constructor
     def __init__(self, brand, top_speed, is_automatic=True):
         self.brand = brand # attributes
@@ -85,101 +84,120 @@
     def drive(self): # method
         print(f"We are driving a {self.brand} vehicle.")</code></pre>
                     </div>
-                    Suppose you are building a conversational robot arm, you need different system components that allow you to control different aspects that make it a) conversational and b) a robot arm. Just the conversational aspect alone is a complex system consisting of a speech-to-text algorithm, a text-to-speech algorithm, and a conversation orchestrator. Each of these components can act as a single object (or an actor) that does a single thing efficiently. Let’s focus on the text-to-speech algorithm and call it the Talker object. The Talker object can have the attributes gender (the gender of the speech), volume (how loud the speech should be), or language. The Talker object can have methods like Talker.talk(text) that takes a text as an input and produces a speech. 
-                    <br><br>
-                    These methods and attributes can only be accessed inside the object. We’ll dig deeper in the Programming section of this course of how objects are programmed in Python. OOP has four (4) pillars – abstraction, encapsulation, polymorphism, and inheritance. These are important concepts that lay the foundation of OOP and its applications in ROS 2 development. 
-                    <br><br>
-                    <div class="concept">
-                        <div class="concept-title">Inheritance</div>
-                        Classes can be created from other classes. This makes code highly reusable. A superclass, or parent class, can be thought of as a simple class where attributes and methods are inherited from. A subclass, on the other hand, is a class that inherits from the superclass. This means that all of the attributes and methods found on the superclass can be copied and even extended by the subclass. 
-                        <br><br>
-                        Suppose you have a class called Vehicle with attributes is_automatic, engine, and top_speed and a method called Drive(). The Vehicle class is a superclass where all other types of vehicles can be derived from. A subclass of it can be Airplane class or Car class which can have different values for its attributes. Superclass can also be thought of as a base class in modern programming parlance. Inheritance from more than one parent superclass (multiple inheritance) is dependent on the programming language.
-                    </div>
-                    <div class="concept">
-                        <div class="concept-title">Polymorphism</div>
-                        Polymorphism from the Greek words “poly” meaning many and “morphe” meaning forms signifies that classes (especially subclasses) can take many forms through a shared interface. While inheritance provides code reusability, polymorphism offers customizability in these reusable codes. Take the previous example, any vehicle has a Drive() method, however, the logic behind driving in different vehicles is different. A car uses a steering wheel while a plane uses a yoke and the method for controlling these vehicles are different.
-                        <br><br>
-                        Polymorphism allows us to override the previous function logic to one that fits the new subclass better. Overriding means replacing the implementation of a method from the parent function to conform to the requirements of the subclass. With that you can call the same method Airplane.Drive() and Car.Drive() from the modified shared implementation of the parent class’s Vehicle.Drive() using the same interface.
-                        </div>
-                    <div class="concept">
-                        <div class="concept-title">Abstraction</div>
-                        Abstraction is simply hiding the implementation logic of objects from the users. Just like using phones, it exposes you only to an interface that allows you to perform its different functionalities. However, it hides the inner workings of how those applications process your inputs. In OOP, accessing methods or attributes from an object is as simple as calling a desired method from an object that implements that method.
-                    </div>
-                    <div class="concept">
-                        <div class="concept-title">Encapsulation</div>
-                        Encapsulation is the idea that an object contains both attributes and methods altogether. An object that performs a function e.g. calculating the area of a circle doesn’t need to expose its inner logic to any other objects or function that needs to access this method. Data hiding is a crucial component of encapsulation. It is important to note that attributes or functions in an object can usually be accessed by their interfaces readily. This is because the methods or attributes are assigned to be public. Data hiding offers other access methods such as private or protected. It must be highlighted that encapsulation offers controlled access and security for the classes.
+                    <div class="content-division-content">Suppose you are building a conversational robot arm, you need different system components that allow you to control different aspects that make it a) conversational and b) a robot arm. Just the conversational aspect alone is a complex system consisting of a speech-to-text algorithm, a text-to-speech algorithm, and a conversation orchestrator. Each of these components can act as a single object (or an actor) that does a single thing efficiently. Let’s focus on the text-to-speech algorithm and call it the Talker object. The Talker object can have the attributes gender (the gender of the speech), volume (how loud the speech should be), or language. The Talker object can have methods like Talker.talk(text) that takes a text as an input and produces a speech. </div>
+                    <div class="content-division-content">These methods and attributes can only be accessed inside the object. We’ll dig deeper in the Programming section of this course of how objects are programmed in Python. OOP has four (4) pillars – abstraction, encapsulation, polymorphism, and inheritance. These are important concepts that lay the foundation of OOP and its applications in ROS 2 development.</div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Inheritance</div>
+                    <div class="content-division-content">Classes can be created from other classes. This makes code highly reusable. A superclass, or parent class, can be thought of as a simple class where attributes and methods are inherited from. A subclass, on the other hand, is a class that inherits from the superclass. This means that all of the attributes and methods found on the superclass can be copied and even extended by the subclass.</div>
+                    <div class="content-division-content">Suppose you have a class called Vehicle with attributes is_automatic, engine, and top_speed and a method called Drive(). The Vehicle class is a superclass where all other types of vehicles can be derived from. A subclass of it can be Airplane class or Car class which can have different values for its attributes. Superclass can also be thought of as a base class in modern programming parlance. Inheritance from more than one parent superclass (multiple inheritance) is dependent on the programming language.</div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Polymorphism</div>
+                    <div class="content-division-content">Polymorphism from the Greek words “poly” meaning many and “morphe” meaning forms signifies that classes (especially subclasses) can take many forms through a shared interface. While inheritance provides code reusability, polymorphism offers customizability in these reusable codes. Take the previous example, any vehicle has a Drive() method, however, the logic behind driving in different vehicles is different. A car uses a steering wheel while a plane uses a yoke and the method for controlling these vehicles are different.</div>
+                    <div class="content-division-content">Polymorphism allows us to override the previous function logic to one that fits the new subclass better. Overriding means replacing the implementation of a method from the parent function to conform to the requirements of the subclass. With that you can call the same method Airplane.Drive() and Car.Drive() from the modified shared implementation of the parent class’s Vehicle.Drive() using the same interface.</div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Abstraction</div>
+                    <div class="content-division-content">Abstraction is simply hiding the implementation logic of objects from the users. Just like using phones, it exposes you only to an interface that allows you to perform its different functionalities. However, it hides the inner workings of how those applications process your inputs. In OOP, accessing methods or attributes from an object is as simple as calling a desired method from an object that implements that method.</div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Encapsulation</div>
+                    <div class="content-division-content">Encapsulation is the idea that an object contains both attributes and methods altogether. An object that performs a function e.g. calculating the area of a circle doesn’t need to expose its inner logic to any other objects or function that needs to access this method. Data hiding is a crucial component of encapsulation. It is important to note that attributes or functions in an object can usually be accessed by their interfaces readily. This is because the methods or attributes are assigned to be public. Data hiding offers other access methods such as private or protected. It must be highlighted that encapsulation offers controlled access and security for the classes.</div>
+                </div>
+            </div>
+
+            <div class="content-content">
+                <div class="content-h2">Programming</div>
+                <div class="content-division">
+                    <div class="content-division-title">Creating a class in Python.</div>
+                    <div class="content-division-content">You can open a Google Colab instance for a Jupyter Notebook experience which is a lot easier. However, you can also create a Python code using <code class="inline-code-normal">code oop.py</code>. We use the class keyword to create a class in Python. By convention, a class should be named using a capitalized noun. The __init__() function is a reserved function used for assigning and initializing attributes to a Python class. As you can see, we added a default value to is_automatic attribute which is True.</div>
+                    <div class="content-division-content">
+                        <pre><code class="language-python">class Vehicle:
+    def __init__(self, brand, top_speed, is_automatic=True):
+        self.brand = brand
+        self.top_speed = top_speed
+        self.is_automatic = is_automatic
+    
+    def drive(self):
+        print(f"We are driving a {self.brand} vehicle.")</code></pre>
                     </div>
                 </div>
                 <div class="content-division">
-                    <div class="content-h2">Programming</div>
-                    <div class="concept">
-                        <ol>
-                            <li><span class="concept-title">Create a class in Python.</span> You can open a Google Colab instance for a Jupyter Notebook experience which is a lot easier. However, you can also create a Python code using <code class="inline-code-normal">code oop.py</code>.We use the class keyword to create a class in Python. By convention, a class should be named using a capitalized noun. The __init__() function is a reserved function used for assigning and initializing attributes to a Python class. As you can see, we added a default value to is_automatic attribute which is True.<br>
-                                <pre><code class="language-python">class Vehicle:
-def __init__(self, brand, top_speed, is_automatic=True):
-    self.brand = brand
-    self.top_speed = top_speed
-    self.is_automatic = is_automatic
-
-def drive(self):
-    print(f"We are driving a {self.brand} vehicle.")</code></pre>
-                            </li>
-                            <li><span class="concept-title">Instantiating an object from a class.</span>
-                                Since we have an __init__() function, we can feed the class with arguments to create objects. To create objects, the minimum requirement is to provide the arguments that don't have a default value. If an argument is optional, you can assign it with a default value None.
-                                <pre><code class="language-python">jimny = Vehicle("Suzuki", 100)
+                    <div class="content-division-title">Instantiating an object from a class.</div>
+                    <div class="content-division-content">Since we have an __init__() function, we can feed the class with arguments to create objects. To create objects, the minimum requirement is to provide the arguments that don't have a default value. If an argument is optional, you can assign it with a default value None.</div>
+                    <div class="content-division-content">
+                        <pre><code class="language-python">jimny = Vehicle("Suzuki", 100)
 fortuner = Vehicle("Toyota", 200, False)</code></pre>
-                            </li>
-                            <li><span class="concept-title">Accessing methods and attributes.</span>
-                                We can then access the attributes and methods of Python classes using the dot notation. To access an attribute just type the object followed by a dot then the attribute you want to access.
-                                <pre><code class="language-python">jimny.top_speed # returns: 100
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Accessing methods and attributes.</div>
+                    <div class="content-division-content">We can then access the attributes and methods of Python classes using the dot notation. To access an attribute just type the object followed by a dot then the attribute you want to access.</div>
+                    <div class="content-division-content">
+                        <pre><code class="language-python">jimny.top_speed # returns: 100
 fortuner.brand # returns: Toyota
 jimny.is_automatic # returns: True</code></pre>
-                                The same semantic applies to accessing methods but methods are functions inside classes so we must include parentheses to access it.
-                                <pre><code class="language-python">jimny.drive() # returns: We are driving a Suzuki vehicle.</code></pre>
-                            </li>
-                            <li><span class="concept-title">Using the <code class="inline-code-normal">@property</code> decorator for accessors.</span>
-                                We can create getters (gets the value of an attribute) and setters (sets the value of an attribute with optional validation tests) using the @property decorator in Python. Suppose we want to enforce that the top speed can only be a positive number, we can do that with the decorator. By convention, attributes start with an underscore during initialization (or any set of characters to hide the data) then it gets returned using the accessor.
-                                <pre><code class="language-python">class Vehicle:
-def __init__(self, brand, top_speed, is_automatic=True):
-    self._brand = brand
-    self._top_speed = top_speed
-    self._is_automatic = is_automatic
-
-@property
-def top_speed(self):
-    """Getter for top_speed"""
-    return self._top_speed
-
-@top_speed.setter
-def top_speed(self, value):
-    """Setter for top_speed with validation"""
-    if not isinstance(value, (int, float)) or value &lt;= 0:
-        raise ValueError("Top speed must be a positive number.")
-    self._top_speed = value
-
-def drive(self):
-    """Method to drive the vehicle"""
-    print(f"We are driving a {self.brand} vehicle.")</code></pre>
-                            </li>
-                            <li><span class="concept-title">Creating a subclass in Python.</span> In creating a subclass in Python, we just have to include the superclass as an argument to the class keyword. The super() function allows you to access methods from the parent class, therefore, super().__init__() inherits the constructor.
-                                <pre><code class="language-python">class Plane(Vehicle):
-def __init__(self, brand, top_speed, is_automatic, altitude=0, num_engines=2):
-    super().__init__(brand, top_speed, is_automatic)
-    self.altitude = altitude
-    self.num_engines = num_engines</code></pre>
-                            </li>
-                            <li><span class="concept-title">Overriding superclass methods.</span>We can then override the drive() method of the Vehicle() class to create a different implementation for the Plane() class. You can call any objects created with Vehicle() class to show that its implementation is not affected even if the same interface is used.
-                                <pre><code class="language-python">class Plane(Vehicle):
-def __init__(self, brand, top_speed, is_automatic, altitude=0, num_engines=2):
-    super().__init__(brand, top_speed, is_automatic)
-    self.altitude = altitude
-    self.num_engines = num_engines
-
-def drive(self):
-    print(f"We are flying the {self.brand} plane at {self.altitude} feet.")</code></pre>
-                            </li>
-                            <li><span class="concept-title">Overriding special or dunder methods.</span>Python provides dunder (double underscore) or special methods that customize how custom classes behave in Python-specific code. Figure 2.2 shows different Python dunder methods and how they are used. 
-                                <pre><code class="language-python">class Plane(Vehicle):
+                    </div>
+                    <div class="content-division-content"> The same semantic applies to accessing methods but methods are functions inside classes so we must include parentheses to access it.</div>
+                    <pre><code class="language-python">jimny.drive() # returns: We are driving a Suzuki vehicle.</code></pre>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Using the <code class="inline-code-normal">@property</code> decorator for accessors.</div>
+                    <div class="content-division-content">We can create getters (gets the value of an attribute) and setters (sets the value of an attribute with optional validation tests) using the @property decorator in Python. Suppose we want to enforce that the top speed can only be a positive number, we can do that with the decorator. By convention, attributes start with an underscore during initialization (or any set of characters to hide the data) then it gets returned using the accessor.</div>
+                    <div class="content-division-content">
+                        <pre><code class="language-python">class Vehicle:
+    def __init__(self, brand, top_speed, is_automatic=True):
+        self._brand = brand
+        self._top_speed = top_speed
+        self._is_automatic = is_automatic
+    
+    @property
+    def top_speed(self):
+        """Getter for top_speed"""
+        return self._top_speed
+    
+    @top_speed.setter
+    def top_speed(self, value):
+        """Setter for top_speed with validation"""
+        if not isinstance(value, (int, float)) or value &lt;= 0:
+            raise ValueError("Top speed must be a positive number.")
+        self._top_speed = value
+    
+    def drive(self):
+        """Method to drive the vehicle"""
+        print(f"We are driving a {self.brand} vehicle.")</code></pre>                            
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Creating a subclass in Python.</div>
+                    <div class="content-division-content">In creating a subclass in Python, we just have to include the superclass as an argument to the class keyword. The super() function allows you to access methods from the parent class, therefore, super().__init__() inherits the constructor.</div>
+                    <div class="content-division-content">
+                        <pre><code class="language-python">class Plane(Vehicle):
+    def __init__(self, brand, top_speed, is_automatic, altitude=0, num_engines=2):
+        super().__init__(brand, top_speed, is_automatic)
+        self.altitude = altitude
+        self.num_engines = num_engines</code></pre>
+                    </div>
+                <div class="content-division">
+                    <div class="content-division-title">Overriding superclass methods.</div>
+                    <div class="content-division-content">We can then override the drive() method of the Vehicle() class to create a different implementation for the Plane() class. You can call any objects created with Vehicle() class to show that its implementation is not affected even if the same interface is used.</div>
+                    <div class="content-division-content">
+                        <pre><code class="language-python">class Plane(Vehicle):
+    def __init__(self, brand, top_speed, is_automatic, altitude=0, num_engines=2):
+        super().__init__(brand, top_speed, is_automatic)
+        self.altitude = altitude
+        self.num_engines = num_engines
+    
+    def drive(self):
+        print(f"We are flying the {self.brand} plane at {self.altitude} feet.")</code></pre>
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Overriding special or dunder methods.</div>
+                    <div class="content-division-content">Python provides dunder (double underscore) or special methods that customize how custom classes behave in Python-specific code.</div>
+                    <div class="content-division-content">
+                        <pre><code class="language-python">class Plane(Vehicle):
     def __init__(self, brand, top_speed, is_automatic, altitude=0, num_engines=2):
         super().__init__(brand, top_speed, is_automatic)
         self.altitude = altitude
@@ -192,35 +210,276 @@ def drive(self):
         return self.brand
 
 print(plane) # returns: Boeing</code></pre>
-                                Now, when you print the plane variable, it shows plane.brand.
-
-                            </li>
-                        </ol>
-                    </div>  
-                    <div class="content-h2">Deeper Look at Nabi</div>
-                    We employed object-oriented programming.
-                    
-                    <div class="concept"></div>
-                    <div class="content-h2">Assignment</div>
-                    <div class="content">
-                        <ol>
-                            <li>
-                                Create a class called Person in your src directory with the file name classes.py.
-                            </li>
-                            <li>
-                                Add attributes (at least 5) and methods (at least 3) to the Person class, use the property decorator.
-                            </li>
-                            <li>
-                                Create three (3) more classes that inherit from the Person class using different jobs, add additional methods and attributes depending on the job.
-                            </li>
-                            <li>
-                                Modify at least one (1) method in the Person class in each of the child classes, add a single-line comment explaining the methods you modified.
-                            </li>
-                            <li>
-                                Commit it to GitHub with the message “A2 added classes” then push. Make sure you only have a single branch
-                            </li>
-                        </ol>
                     </div>
+                    <div class="content-division-content">Now, when you print the plane variable, it shows plane.brand. Extending this, the figure below shows different Python dunder methods and how they are used</div>
+                    <div class="content-division-content">
+                        <table style="max-width: 500px;">
+                            <tr>
+                            <th>Common Syntax</th>
+                            <th>Special Method Form</th>
+                            </tr>
+                            <tr><td>a + b</td><td>a.__add__(b) or b.__radd__(a)</td></tr>
+                            <tr><td>a - b</td><td>a.__sub__(b) or b.__rsub__(a)</td></tr>
+                            <tr><td>a * b</td><td>a.__mul__(b) or b.__rmul__(a)</td></tr>
+                            <tr><td>a / b</td><td>a.__truediv__(b) or b.__rtruediv__(a)</td></tr>
+                            <tr><td>a // b</td><td>a.__floordiv__(b) or b.__rfloordiv__(a)</td></tr>
+                            <tr><td>a % b</td><td>a.__mod__(b) or b.__rmod__(a)</td></tr>
+                            <tr><td>a ** b</td><td>a.__pow__(b) or b.__rpow__(a)</td></tr>
+                            <tr><td>a << b</td><td>a.__lshift__(b) or b.__rlshift__(a)</td></tr>
+                            <tr><td>a >> b</td><td>a.__rshift__(b) or b.__rrshift__(a)</td></tr>
+                            <tr><td>a &amp; b</td><td>a.__and__(b) or b.__rand__(a)</td></tr>
+                            <tr><td>a ^ b</td><td>a.__xor__(b) or b.__rxor__(a)</td></tr>
+                            <tr><td>a | b</td><td>a.__or__(b) or b.__ror__(a)</td></tr>
+                            <tr><td>a += b</td><td>a.__iadd__(b)</td></tr>
+                            <tr><td>a -= b</td><td>a.__isub__(b)</td></tr>
+                            <tr><td>+a</td><td>a.__pos__()</td></tr>
+                            <tr><td>-a</td><td>a.__neg__()</td></tr>
+                            <tr><td>~a</td><td>a.__invert__()</td></tr>
+                            <tr><td>abs(a)</td><td>a.__abs__()</td></tr>
+                            <tr><td>a &lt; b</td><td>a.__lt__(b)</td></tr>
+                            <tr><td>a &lt;= b</td><td>a.__le__(b)</td></tr>
+                            <tr><td>a &gt; b</td><td>a.__gt__(b)</td></tr>
+                            <tr><td>a &gt;= b</td><td>a.__ge__(b)</td></tr>
+                            <tr><td>a == b</td><td>a.__eq__(b)</td></tr>
+                            <tr><td>a != b</td><td>a.__neq__(b)</td></tr>
+                            <tr><td>v in a</td><td>a.__contains__(v)</td></tr>
+                            <tr><td>a[k]</td><td>a.__getitem__(k)</td></tr>
+                            <tr><td>a[k] = v</td><td>a.__setitem__(k, v)</td></tr>
+                            <tr><td>del a[k]</td><td>a.__delitem__(k)</td></tr>
+                            <tr><td>a(arg1, arg2, …)</td><td>a.__call__(arg1, arg2, …)</td></tr>
+                            <tr><td>len(a)</td><td>a.__len__()</td></tr>
+                            <tr><td>hash(a)</td><td>a.__hash__()</td></tr>
+                            <tr><td>iter(a)</td><td>a.__iter__()</td></tr>
+                            <tr><td>next(a)</td><td>a.__next__()</td></tr>
+                            <tr><td>bool(a)</td><td>a.__bool__()</td></tr>
+                            <tr><td>float(a)</td><td>a.__float__()</td></tr>
+                            <tr><td>int(a)</td><td>a.__int__()</td></tr>
+                            <tr><td>repr(a)</td><td>a.__repr__()</td></tr>
+                            <tr><td>reversed(a)</td><td>a.__reversed__()</td></tr>
+                            <tr><td>str(a)</td><td>a.__str__()</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-content">
+                <div class="content-h2">Deeper Look at Nabi</div>
+                <div class="content-division">
+                    <div class="content-division-title">Simple Node</div>
+                    <div class="content-division-content">The class provided below is responsible for the low-level control of the servomotor parallel gripper. This is actually the smallest class that we have in our codebase because it simply initializes the serial communication with the Arduino and controls the servomotor using serial commands. You can see that the <code class="inline-code-normal">move</code> method is utilized by both <code class="inline-code-normal">open</code> and <code class="inline-code-normal">close</code> methods offering a higher level of abstraction. We will learn about parameters in Week 4. Don't mind the other functions that may not be declared, this is just a code snippet.</div>
+                    <div class="content-division-content">
+                        <pre><code class="language-python">class ParallelGripper(Node):
+    def __init__(self, axis, baud_rate, open_limit, close_limit, bus=None):
+        super().__init__(f'{axis}')
+
+        # Declare parameters for the node
+        self.declare_parameter('axis', axis, ParameterDescriptor(description='Name of the joint.'))
+        self.declare_parameter('baud_rate', baud_rate, ParameterDescriptor(description='Baud rate of the joint.'))
+        self.declare_parameter('open_limit', open_limit, ParameterDescriptor(description='Max joint limit for opening the gripper.'))
+        self.declare_parameter('close_limit', close_limit, ParameterDescriptor(description='Max joint limit for closing the gripper.'))
+
+        # Set node parameters as class parameters
+        self.axis = self.get_parameter('axis').get_parameter_value().string_value
+        self.baud_rate = self.get_parameter('baud_rate').get_parameter_value().integer_value
+        self.open_limit = self.get_parameter('open_limit').get_parameter_value().integer_value
+        self.close_limit = self.get_parameter('close_limit').get_parameter_value().integer_value
+
+        try:
+            self.bus = bus
+
+            if bus is None:
+                self.arduino_port = find_port(['Arduino', 'arduino', 'ttyACM'])
+
+                if self.arduino_port is None:
+                    self.get_logger().error('No Arduino serial interface found. Please check your connection.')
+                change_permissions(file_path=self.arduino_port, permissions='777', password=os.getenv('PASSWORD'))
+
+                self.bus = serial.Serial(self.arduino_port, self.baud_rate)
+
+            self.get_logger().info(f'Joint {self.axis} initialized.')
+        except Exception as e:
+            self.get_logger().error(f"Failed to initialize gripper: {e}")
+
+    def move(self, angle):
+        self.bus = serial.Serial(self.arduino_port, self.baud_rate)
+        if not (self.close_limit &lt;= angle &lt;= self.open_limit):
+            self.get_logger().warn(f'Please provide an angle between {self.close_limit} and {self.open_limit}.')
+            return
+        
+        try:
+            self.bus.write(str(angle).encode())
+        except Exception as e:
+            self.get_logger().error(f"Cannot move gripper: {e}")
+    
+    def open(self):
+        self.move(self.open_limit)
+
+    def close(self):
+        self.move(self.close_limit)
+                        </code></pre>
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Extending ROS 2 Nodes</div>
+                    <div class="content-division-content">The <code class="inline-code-normal">BaseNode</code> class inherits from <code class="inline-code-normal">Node</code> class from rclpy. We extended its functionalities to allow dynamic parameter changes using the vocal interface. This functionality handles data validation, type checking, and parameter change. This is an example of inheritance and polymorphism where a class inherits methods and attributes from its parents and extends it.</div>
+                    <div class="content-division-content">
+                        <pre><code class="language-python">class BaseNode(Node):
+    # Suppress only the specific PyTorch warnings
+    warnings.filterwarnings("ignore", category=UserWarning, module="torch.nn.modules.rnn")
+    warnings.filterwarnings("ignore", category=FutureWarning, module="torch.nn.utils.weight_norm")
+    warnings.simplefilter("ignore", UserWarning)
+
+    def parse_params(self, msg: String):
+        try:
+            params: dict = json.loads(msg.data)
+        except json.JSONDecodeError as e:
+            self.get_logger().error(f"Failed to parse JSON data: {e}")
+            return
+        
+        return params
+
+    def change_parameter(self, msg: String):
+
+        params = self.parse_params(msg)
+
+        if not params:
+            return
+        
+        self.get_logger().info(f'Parameters: {params}')
+
+        # Supported parameters that can be changed
+        supported_parameters = {
+            'fps': rclpy.Parameter.Type.INTEGER,
+            'gender': rclpy.Parameter.Type.STRING,
+            'mode': rclpy.Parameter.Type.STRING,
+            'model': rclpy.Parameter.Type.STRING,
+            'threshold': rclpy.Parameter.Type.INTEGER,
+            'silence_limit': rclpy.Parameter.Type.DOUBLE,
+            'inference': rclpy.Parameter.Type.STRING,
+        }
+
+        status = params['change_parameter']
+
+        self.get_logger().info(f'Status: {status}')
+
+        # If the status of changing the parameter is False, return
+        if status == 'False':
+            return
+
+        for key in params.keys():
+            if key in supported_parameters.keys():
+                # the parameter is the key
+                parameter = key
+                # the parameter data type is obtained from supported_parameters
+                _type = supported_parameters[f'{key}']
+                # the value is obtained from the msg
+                value = params[f'{key}']
+
+                # change parameter type if necessary
+                if _type == rclpy.Parameter.Type.INTEGER:
+                    value = int(value)
+                if _type == rclpy.Parameter.Type.DOUBLE:
+                    value = float(value)
+                if _type == rclpy.Parameter.Type.STRING:
+                    value = str(value)
+                
+                self.get_logger().info(f"Processing parameter: {key}, type: {type}, value: {value}")
+
+        # set the parameter
+        param = Parameter(parameter, _type, value)
+        self.get_logger().info(f"Setting parameter: '{parameter}' to '{value}'")
+        self.set_parameters([param])
+        self.get_logger().info("Parameter change completed.")</code></pre>
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Classes Inside Classes</div>
+                    <div class="content-division-content">A class contains methods and attributes. A powerful way to leverage object-oriented design is to use classes inside classes. This creates modular representations of a bigger entity. We did this with the Joint Actor node which uses individual Joint nodes to represent each axis. With this, we can adjust the parameters for each Joint node (or axis) but we can still orchestrate the entire robot arm in unison. The code for the Joint Actor is 300 lines long, so we limited what we displayed here.</div>
+                    <div class="content-division-content">You can also see that the JointActor node inherits the BaseNode.</div>
+                    <div class="content-division-content">
+                        <pre><code class="language-python">class JointActor(BaseNode):
+    def __init__(self, joint_configs: List, gripper_config: dict):
+        super().__init__('actor')
+
+        try:
+            # Declare parameters
+            self.declare_parameter('inference_period', 3.0, ParameterDescriptor(description='TEMP: Period for performing RL inferences.'))
+            self.inference_period = self.get_parameter('inference_period').get_parameter_value().double_value
+
+            # Initialize CAN and Arduino buses
+            self.initialize_can_bus()
+            # self.initialize_arduino_bus(gripper_config.get('baud_rate'))
+            
+            # Create the Joint nodes
+            self.joints: List[Joint] = []
+            for config in joint_configs:
+                joint = Joint(**config, bus=self.can_bus)
+                self.joints.append(joint)
+            
+            # Create the Gripper node
+            self.gripper = ParallelGripper(**gripper_config)
+        except Exception as e:
+            self.get_logger().error(f'Failed to initialize actor: {e}')
+        def move_sync(self, joints: List[Joint], joint_angles, joint_velocities=[600]*6, joint_accelerations=[2]*6, type='absolute'):
+            try:
+                for joint, angle, velocity, acceleration in zip(joints, joint_angles, joint_velocities, joint_accelerations):
+                    joint.move(angle, velocity, acceleration, type=type)
+            except Exception as e:
+                self.get_logger().error(f'Failed to move the motors synchronously: {e}')
+    
+        def reset_position(self):
+            for joint in self.joints:
+                joint.home()
+    
+def main(args=None):
+    load_dotenv()
+
+    joint_configs = [
+        {'axis': 'X', 'can_id': 0x01, 'max_ccw_rot': -90, 'max_cw_rot': 90, 'default_speed': 2000,  'gear_ratio': 13.5,  'zero_angle': 0},
+        {'axis': 'Y', 'can_id': 0x02, 'max_ccw_rot': -90, 'max_cw_rot': 90, 'default_speed': 3000, 'gear_ratio': 150,   'zero_angle': 0},
+        {'axis': 'Z', 'can_id': 0x03, 'max_ccw_rot': -90, 'max_cw_rot': 90, 'default_speed': 3000, 'gear_ratio': 150,   'zero_angle': 0},
+        {'axis': 'A', 'can_id': 0x04, 'max_ccw_rot': -90, 'max_cw_rot': 90, 'default_speed': 600,  'gear_ratio': 48,    'zero_angle': 0},
+        {'axis': 'B', 'can_id': 0x05, 'max_ccw_rot': -90, 'max_cw_rot': 90, 'default_speed': 600,  'gear_ratio': 67.82, 'zero_angle': 0},
+        {'axis': 'C', 'can_id': 0x06, 'max_ccw_rot': -90, 'max_cw_rot': 90, 'default_speed': 600,  'gear_ratio': 67.82, 'zero_angle': 0},
+    ]
+
+    gripper_config = {'axis': 'G', 'baud_rate': 9600, 'open_limit': 105, 'close_limit': 60}
+
+    try:
+        rclpy.init(args=args)
+
+        joint_actor = JointActor(joint_configs=joint_configs, gripper_config=gripper_config)
+
+        rclpy.spin(joint_actor)
+    except KeyboardInterrupt:
+        pass
+
+if __name__ == '__main__':
+    main()</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-content">
+                <div class="content-h2">Assignment</div>
+                <div class="content-division">
+                    <ol>
+                        <li>
+                            Create a class called Person in your src directory with the file name classes.py.
+                        </li>
+                        <li>
+                            Add attributes (at least 5) and methods (at least 3) to the Person class, use the property decorator.
+                        </li>
+                        <li>
+                            Create three (3) more classes that inherit from the Person class using different jobs, add additional methods and attributes depending on the job.
+                        </li>
+                        <li>
+                            Modify at least one (1) method in the Person class in each of the child classes, add a single-line comment explaining the methods you modified.
+                        </li>
+                        <li>
+                            Commit it to GitHub with the message “A2 added classes” then push. Make sure you only have a single branch
+                        </li>
+                    </ol>
                 </div>
             </div>
         </div>

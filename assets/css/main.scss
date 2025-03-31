@@ -100,6 +100,10 @@ ul, ol {
         padding-top: 20px;
         padding-bottom: 20px;
 
+        .content-header {
+            margin-bottom: 40px;
+        }
+
         .content-title {
             font-size: calc(1.325rem + .9vw);
             font-weight: 600;
@@ -107,20 +111,27 @@ ul, ol {
 
         .content-content {
             line-height: 1.5em;
+            margin-top: 20px;
 
             .content-h2 {
-                font-size: calc(1rem + .5vw);
+                font-size: calc(1.25rem + .5vw);
                 font-weight: 600;
-                padding-top: 10px;
                 padding-bottom: 10px;
             }            
 
             .content-division {
-                margin-top: 20px;
+                margin-top: 10px;
                 margin-bottom: 20px;
+                padding-left: 20px;
                     .content-division-title {
                         font-weight: 800;
                         margin-bottom: 10px;
+                    }
+
+                    .content-division-content {
+                        padding-left: 20px;
+                        margin-top: 10px;
+                        margin-bottom: 5px;
                     }
                 }
                 
@@ -136,3 +147,21 @@ li {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+table {
+    background-color: $codeblock-color-background;
+    border-radius: 8px;
+    font-size: 90%;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    td {
+        padding: 5px;
+    }
+
+    tr:first-child th {
+        padding-bottom: 10px;
+        border-bottom: 1px solid $main-color-links;
+    }
+}
+
