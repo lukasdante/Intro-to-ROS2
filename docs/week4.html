@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <title>Robotics - Week 3</title>
+</head>
+<body>
+    <div class="left-panel">
+        <div class="left-block-panel">
+            <div class="main-title">Introduction to the <br>Robot Operating System 2</div>
+            <div class="distro-title">Humble Hawksbill</div>
+        </div>
+        
+        <div class="left-block-panel">
+            <div class="author-name">John Louis D. Lagramada</div>
+            <div class="author-email"><a href="mailto:johnlouis.dante@gmail.com">johnlouis.dante@gmail.com</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="course"><a href="week0.html"><span class="course-week-no">Week 0 </span>Gearing Up</a></div>
+            <div class="course"><a href="week1.html"><span class="course-week-no">Week 1 </span>Introduction to ROS 2</a></div>
+            <div class="course"><a href="week2.html"><span class="course-week-no">Week 2 </span>Object-Oriented Programming</a></div>
+            <div class="course"><a href="week3.html"><span class="course-week-no">Week 3 </span>Nodes, Messages, and Topics</a></div>
+            <div class="course"><a href="week4.html"><span class="course-week-no">Week 4 </span>Parameters</a></div>
+            <div class="course"><a href="week5.html"><span class="course-week-no">Week 5 </span>Custom Launch</a></div>
+            <div class="course"><a href="week6.html"><span class="course-week-no">Week 6 </span>Common ROS 2 Packages</a></div>
+            <div class="course"><a href="week7.html"><span class="course-week-no">Week 7 </span>Services</a></div>
+            <div class="course"><a href="week8.html"><span class="course-week-no">Week 8 </span>Actions</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="final-project">Final Project</div>
+            <div class="final-project-gallery">Gallery of Final Projects</div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="references">References</div>
+            <div class="license">Licenses</div>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="right-block-panel">
+            <div class="content-header">
+                <div class="content-title">Parameters</div>
+                <div class="content-author">Written by: Kyle Mhiron Bumagat and John Louis D. Lagramada</div>
+                <hr class="content-divider">
+                <div class="content-intro">This section discusses parameters in ROS 2, how to declare parameters, change them, and remap them.</div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Objectives</div>
+                <div class="content-division">
+                    <ul>
+                        <li>Learners will be able to declare parameters in a ROS system.</li>
+                        <li>Learners will be able to understand how parameters work in ROS.</li>
+                        <li>Learners will be able to remap parameters in launching ROS.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Concepts</div>
+                <div class="content-division">
+                    <div class="content-division-title">Parameters</div>
+                    <div class="content-division-content">In ROS 2, parameters allow nodes to store and manage configuration values dynamically which the nodes can access at runtime. ROS 2 parameters are local to each node. They allow for flexible control of node behavior without modifying the source code. This improves modularity and ensures that parameters are scoped to their respective nodes, reducing unintended interactions between different nodes. Unlike topics or services, parameters are typically used for node configuration rather than real-time data exchange.</div>
+                    <div class="content-division-content">Parameters are addressed by node name, node namespace, parameter name, and parameter namespace. Providing a parameter namespace is optional. Each parameter consists of a key, a value, and a descriptor. The key is a string and the value is one of the following ROS 2 parameters can be of the following types:</div>
+                    <div class="content-division-content">
+                        <table>
+                            <tr>
+                              <th>Parameter Type</th>
+                              <th>Example Key</th>
+                              <th>Example Value</th>
+                            </tr>
+                            <tr>
+                              <td>Integer (int64)</td>
+                              <td><code>num_sensors</code></td>
+                              <td>4</td>
+                            </tr>
+                            <tr>
+                              <td>Float (double)</td>
+                              <td><code>robot_speed</code></td>
+                              <td>1.5</td>
+                            </tr>
+                            <tr>
+                              <td>String (string)</td>
+                              <td><code>robot_name</code></td>
+                              <td>“Nabi”</td>
+                            </tr>
+                            <tr>
+                              <td>Boolean (bool)</td>
+                              <td><code>sensor_enabled</code></td>
+                              <td>True</td>
+                            </tr>
+                            <tr>
+                              <td>List (array)</td>
+                              <td><code>waypoints</code></td>
+                              <td>[0.0, 1.0, 2.0]</td>
+                            </tr>
+                          </table>                          
+                    </div>
+                    <div class="content-division-content">By default all descriptors are empty, but can contain parameter descriptions, value ranges, type information, and additional constraints. In declaring parameters, by default, nodes must explicitly declare parameters before they can be used. This is so that the type and name of the parameters are well-defined at node startup time, which reduces the chances of misconfiguration later on. </div>
+                    <div class="content-division-content">Parameters can be modified at runtime without restarting the node. To set a parameter for a running node, you can run:</div>
+                    <div class="content-division-content"><pre><code class="language-bash">ros2 param set /parameter_example parameter_example1 1.0</code></pre></div>
+                    <div class="content-division-content">To retrieve the value of a parameter, you can run: </div>
+                    <div class="content-division-content"><pre><code class="language-bash">ros2 param get /parameter_example parameter_example1</code></pre></div>
+                    <div class="content-division-content">To list all parameters for a node, you can run: </div>
+                    <div class="content-division-content"><pre><code class="language-bash">ros2 param list /parameter_example</code></pre></div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Remapping</div>
+                    <div class="content-division-content">Topics, parameters, and services are identified by Names. Names are hard coded in ROS nodes, but they can be changed at runtime through remapping. Without remapping every instance of a node would require changes in code. It also allows users to change the names of parameters at runtime without modifying the source code. This is particularly useful when running multiple instances of the same node or integrating different components and allows reusing the same node executable in different parts of the system.</div>
+                    <div class="content-division-content">Parameter remapping enables dynamically adjusting the node's parameters either through the command line (CLI) or using a launch file. You can remap parameters directly when launching a ROS 2 node using the --ros-args option. This command launches my_node while setting the parameter_example1 parameter to 2.0.</div>
+                    <div class="content-division-content"><pre><code class="language-bash">ros2 run my_package my_node --ros-args -p parameter_example1:=2.0</code></pre></div>
+                    <div class="content-division-content"></div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Programming</div>
+                <div class="content-division">
+                    <div class="content-division-title">Declaring Parameters</div>
+                    <div class="content-division-content">
+                        <ol>
+                            <li>Open your terminal.</li>
+                            <li>Create a ROS 2 workspace and navigate into it. Also, create a new package named param_tutorial.
+                                <pre><code class="language-bash">cd ~/ros2_ws/src
+ros2 pkg create param_tutorial --build-type ament_python --dependencies rclpy</code></pre>
+                            </li>
+                            <li>Write a ROS 2 node with parameters. Now, create a Python script that declares and uses parameters. In your package directory, /ros2_ws/src/param_tutorial/param_tutorial. Create a python file named param_node.py
+                                <pre><code class="language-python">import rclpy
+from rclpy.node import Node
+
+class ParameterNode(Node):
+    def __init__(self):
+        super().__init__('param_node')
+
+        # Declare parameters
+        self.declare_parameter('robot_name', 'Arctos')
+        self.declare_parameter('speed', 1.0)
+
+        # Retrieve parameter values
+        robot_name = self.get_parameter('robot_name').get_parameter_value().string_value
+        speed = self.get_parameter('speed').get_parameter_value().double_value
+
+        self.get_logger().info(f'Robot Name: {robot_name}')
+        self.get_logger().info(f'Speed: {speed}')
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = ParameterNode()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()</code></pre>
+                            </li>
+                            <li>Make the script executable by giving it permission.
+                                <pre><code class="language-bash">chmod +x param_node.py</code></pre>
+                                Open setup.py to add the executable.
+                                <pre><code class="language-bash">code ~/ros2_ws/src/param_tutorial/setup.py</code></pre>
+                                Modify the entry points as follows:
+                                <pre><code class="language-python">entry_points={
+    'console_scripts': [
+        'param_node = param_tutorial.param_node:main',
+    ],
+},</code></pre>
+                            </li>
+                            <li>Build the workspace.
+                                <pre><code class="language-bash">cd ~/ros2_ws
+colcon build --packages-select param_tutorial
+source install/setup.bash
+                                </code></pre>
+                            </li>
+                            <li>Run the node in the same terminal.
+                                <pre><code class="language-bash">ros2 run param_tutorial param_node</code></pre>
+                                The terminal should log the robot name and speed parameters as shown below.
+                                <img src="../assets/img/asset_41.png" alt="" class="screenshot">
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Remapping Declared Parameters</div>
+                    <div class="content-division-content">
+                        <ol>
+                            <li>Remap parameters using command line interface. You can override parameters when running the node:
+                                <pre><code class="language-bash">ros2 run param_tutorial param_node --ros-args -p robot_name:=Nabi -p speed:=2.5</code></pre>
+                                The printed parameters should be different now as per below.
+                                <img src="../assets/img/asset_42.png" alt="" class="screenshot">
+                                We will learn more about remapping parameters in custom launch files in the next module.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Deeper Look at Nabi</div>
+                <div class="content-division">
+                    <div class="content-division-title">Content Title 1</div>
+                    <div class="content-division-content">Content 1</div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Assignment</div>
+                <div class="content-division">
+                    <ol>
+                        <li>Creating a ROS 2 node with parameters.
+                            <ol type="A">
+                                <li>Set a minimum and maximum limit for speed_limit.</li>
+                                <li>If speed_limit is set beyond the range 1-50, log a warning and reset to default.</li>
+                            </ol>
+                        </li>
+                        <li>Implement parameter remapping using the command line.</li>
+                        <li>Implement parameter remapping in a launch file.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

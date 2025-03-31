@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-    <title>Robotics - Week 1</title>
+    <title>Robotics - Week 3</title>
 </head>
 <body>
     <div class="left-panel">
@@ -36,10 +36,6 @@
         </div>
         <hr class="left-panel-divider">
         <div class="left-block-panel">
-            <div class="submissions">Submissions</div>
-        </div>
-        <hr class="left-panel-divider">
-        <div class="left-block-panel">
             <div class="final-project">Final Project</div>
             <div class="final-project-gallery">Gallery of Final Projects</div>
         </div>
@@ -52,272 +48,374 @@
     <div class="right-panel">
         <div class="right-block-panel">
             <div class="content-header">
-                <div class="content-title">Introduction to ROS 2</div>
-                <div class="content-author">Written by: John Louis D. Lagramada</div>
+                <div class="content-title">Nodes, Messages, and Topics</div>
+                <div class="content-author">Written by: Kyle Mhiron Bumagat and John Louis D. Lagramada</div>
                 <hr class="content-divider">
-                <div class="content-intro">This section tackles the introduction to ROS 2, its history, and how workspaces and packages are created.</div>
+                <div class="content-intro">This section discusses nodes and how they communicate using a publisher-subscriber architecture through topics using messages.</div>
             </div>
             <div class="content-content">
                 <div class="content-h2">Objectives</div>
                 <div class="content-division">
                     <ul>
-                        <li>Learners will be able to understand core ROS 2 foundational concepts.</li>
-                        <li>Learners will be able to build a ROS 2 workspace using <code class="inline-code-normal">colcon</code>.</li>
-                        <li>Learners will be able to build ROS 2 packages in <code class="inline-code-normal">ament_cmake</code> and <code class="inline-code-normal">ament_python</code> build types and differentiate among them.</li>
+                        <li>Learners will be able to define nodes, messages, and topics.</li>
+                        <li>Learners will understand the publisher-subscriber architecture of ROS 2.</li>
+                        <li>Learners will be able to demonstrate building nodes with built-in messages in line with developer standards.</li>
+                        <li>Learners will be able to demonstrate how to encode and decode custom messages using serialization methods.</li>
                     </ul>
                 </div>
             </div>
             <div class="content-content">
                 <div class="content-h2">Concepts</div>
                 <div class="content-division">
-                    <div class="content-division-title">The Robot Operating System</div>
-                    <div class="content-division-content">
-                        The Robot Operating System or ROS is a robotics middleware platform consisting of multiple frameworks, libraries, and tools enabling robotics software development. It is open-source with a large suite of open-source packages such as MoveIt for motion planning, RViz for visualization, and Gazebo for 3D simulations. ROS is not a real operating system but it has different distributions analogous to real operating systems. Windows, an operating system, released versions such as Windows XP and Windows 10. The premise with these releases is an improvement of the previous released distributions. The same premise applies to ROS where in a span of 23 distributions, ROS developers aimed continuous improvement in accessibility, security, and efficiency, to name a few.
-                    </div>
+                    <div class="content-division-title">Nodes</div>
+                    <div class="content-division-content">Each node in ROS should be responsible for a single, modular task. It is a fundamental building block of a robotic system. It represents a single process that performs computations, such as reading sensor data, controlling motors, or processing images. Each node can send and receive data from other nodes via topics, services, actions, or parameters. They communicate with each other to build a modular and scalable robotic system.</div>
+                    <div class="content-division-content">Each node has a unique name in the ROS 2 system. They can be assigned specific names to prevent conflicts. The namespaces allow grouping of related nodes for better organization. The nodes can also be remapped dynamically at runtime.</div>
+                    <div class="content-division-content">ROS 2 provides commands to list and monitor active nodes.</div>
+                    <div class="content-division-content"><pre><code class="language-bash">ros2 node list</code></pre></div>
+                    <div class="content-division-content">To get information about a specific node. You can use:</div>
+                    <div class="content-division-content"><pre><code class="language-bash">ros2 node info /my_node</code></pre></div>
+                    <div class="content-division-content">This displays details such as publishers, subscribers, services, and parameters associated with the node.</div>
                 </div>
                 <div class="content-division">
-                    <div class="content-division-title">ROS and ROS 2</div>
-                    <div class="content-division-content">We’ve talked about ROS in general, however, ROS actually comes in two different versions – ROS and ROS 2. Willow Garage developed ROS (1) on March 2, 2010, releasing the first distribution called Box Turtle. The advent of ROS became popular among roboticists, until 10 years later, the last ROS (1) distribution – ROS Noetic Ninjemys – was released. Time flies, ROS Noetic is nearing its end-of-life (EOL) in the year this module is published. When a software reaches EOL, support and further development for the distribution is stopped. ROS (1) will reach complete EOL on May 23, 2025, the same day ROS Noetic reaches EOL.</div>
-                    <div class="content-division-content">This doesn’t mean that the entire open-source robotics software development is a dead industry. In fact, a better version of ROS called ROS 2 was released. ROS 2 improves many aspects of ROS, these improvements are summarized in the figure below. In this module, we refer to ROS 2 as simply ROS to avoid confusion, specifically the Humble Hawksbill distribution. ROS Humble is a long-term support (LTS) distribution that is supported by modern packages such as Isaac ROS and Isaac Sim ROS bridge which bridges robotics and artificial intelligence (AI). These are advanced topics that are not covered in this module but it is worth noting.</div>
+                    <div class="content-division-title">Messages</div>
+                    <div class="content-division-content">Nodes communicate with each other by publishing messages to topics. A message is a simple data structure, comprising typed fields. They define the format of data that can be sent and received over topics, services, or actions. Each message consists of one or more fields, which can be basic types such as integers, floats, and strings or complex types like arrays and nested messages.</div>
+                    <div class="content-division-content">ROS 2 nodes use messages to communicate via topics, services, and actions. In topics, it is often called the publisher-to-subscriber model. It is used for continuous data streaming. For example, the camera node publishes image messages, and a processing node subscribes to them.  In services, this is called the request-response model. It is used for on-demand communication. For example, a node requests sensor calibration data from another node. For the actions, a goal-feedback-result model is commonly used for long-duration tasks with feedback. For example, a robot arm moves to a target position and provides feedback on its status.</div>
+                    <div class="content-division-content">For custom message types, users can create their own messages if predefined ones don’t meet their needs. Custom messages in ROS 2 are defined in .msg files, which specify data types like int32, float64, string.</div>
                     <div class="content-division-content">
                         <table>
                             <tr>
-                              <th>Feature</th>
-                              <th>ROS 1</th>
-                              <th>ROS 2</th>
+                              <th>Message Type</th>
+                              <th>Description</th>
+                              <th>Example</th>
                             </tr>
                             <tr>
-                              <td>Middleware</td>
-                              <td>TCP (Transmission Control Protocol)</td>
-                              <td>DDS (Data Distribution Service)</td>
+                              <td>std_msgs/String</td>
+                              <td>Sends text data</td>
+                              <td>‘Hello!’</td>
                             </tr>
                             <tr>
-                              <td>Speed</td>
-                              <td>Slow</td>
-                              <td>Real-Time</td>
+                              <td>std_msgs/Int32</td>
+                              <td>Sends an integer value</td>
+                              <td>42</td>
                             </tr>
                             <tr>
-                              <td>Security</td>
-                              <td>No security</td>
-                              <td>DDS Security plug-ins</td>
+                              <td>std_msgs/Float32</td>
+                              <td>Send a floating point number</td>
+                              <td>3.14</td>
                             </tr>
                             <tr>
-                              <td>OS Support</td>
-                              <td>Linux</td>
-                              <td>Linux, Windows, macOS</td>
-                            </tr>
-                            <tr>
-                              <td>Node Management</td>
-                              <td>Centralized in roscore</td>
-                              <td>Decentralized</td>
-                            </tr>
-                            <tr>
-                              <td>Lifecycle Management</td>
-                              <td>No lifecycle management</td>
-                              <td>Managed nodes</td>
-                            </tr>
-                            <tr>
-                              <td>Executors</td>
-                              <td>No standard executor</td>
-                              <td>Multithreading executors</td>
-                            </tr>
-                            <tr>
-                              <td>Package Management</td>
-                              <td>catkin</td>
-                              <td>colcon/ament</td>
+                              <td>std_msgs/Bool</td>
+                              <td>Sends a boolean value</td>
+                              <td>True</td>
                             </tr>
                           </table>
                     </div>
                 </div>
                 <div class="content-division">
-                    <div class="content-division-title">Client Libraries</div>
-                    <div class="content-division-content">ROS Client Library or rcl allows all ROS core functionalities to run in different programming languages. ROS Humble has stable support for C++ (rclcpp) and Python (rclpy) but you can program in different languages or frameworks that are supported by the community such as Node.js, Rust, and Flutter. ROS provides wrappers for these programming languages that wrap around the core rcl library. The rcl library is implemented in C because most languages are compatible and precedes from C. Therefore, it is possible to implement ROS in different programming languages because the client library shares functionalities such as namespaces, time, and parameter server. </div>
-                    <div class="content-division-content">We will focus on rclpy in this course due to Python’s simplicity. Its simplicity, however, comes with a tradeoff with efficiency. Python is a dynamically typed language which is prone to errors especially when declaring parameters. We will also touch rclcpp from time to time to develop interfaces using rosidl client library. This allows us to create custom messages, services, and actions which are core ROS components that we will go through in this course.</div>
-                </div>
-                <div class="content-division">
-                    <div class="content-division-title">Workspaces</div>
-                    <div class="content-division-content">Workspaces in ROS 2 are environments that allow developers to build different robotics applications. With workspaces, we can build using different distributions of ROS 2 or even with different versions of packages using the same device. These workspaces can be booted up by simply sourcing the setup files that are built during the creation of the workspace. We handled sourcing the underlay workspace during the installation by appending it to the startup bash script. An underlay workspace is the core ROS 2 workspace which includes all the packages that are installed during installation.</div>
-                    <div class="content-division-content">An overlay workspace is a workspace that you build on top of the underlay workspace. We can easily build overlay workspaces using colcon. The importance of overlay workspace is highlighted whenever you want to build projects, e.g. a robot arm, an autonomous moving robot, or an IoT system. It essentially allows you to separate the tables in your laboratory such that the tools or resources you use for different projects do not get mixed up with the others.</div>
-                    <div class="content-division-content">Once you build a workspace using colcon, it will generate three (3) folders. A build folder where all the intermediate files are located which are essential for the building the workspace and the packages. An install folder where all the packages are installed so that you can use it in your applications. Lastly, a log folder that stores all the logging information whenever colcon is called. A src folder should be created alongside these folders as well where all the code will be written. You don’t want to delete any of these folders as they are essential in running your ROS 2 workspace.</div>
-                </div>
-                <div class="content-division">
-                    <div class="content-division-title">Packages</div>
-                    <div class="content-division-content">The organizational units of code in ROS 2 are packages. Packages allow developers to share and collaborate their work with other developers. Packages, like workspaces, allow you to organize your code into different modular components. The packages are built using ament which supports CMake and Python build types using ament_cmake and ament_python, respectively. The different build types and their corresponding language support and use-cases are summarized in the figure below.</div>
+                    <div class="content-division-title">Topics</div>
+                    <div class="content-division-content">In ROS 2, topics are the primary mechanism for message-based communication between nodes. A topic is a named channel where nodes exchange data using the publisher-subscriber model. In general, nodes are not aware of who they are communicating with. Instead, nodes that are interested in data subscribe to the relevant topic; nodes that generate data publish to the relevant topic. With that, multiple publishers and subscribers can use the same topic.</div>
+                    <div class="content-division-content">Topics are intended for unidirectional, streaming communication. They do not need to establish direct connections; they just publish or subscribe to a topic name.</div>
+                    <div class="content-division-content">Topics work in ROS 2 by a publisher node being created and assigned to a topic. Then, a subscriber node subscribes to the same topic. The publisher sends messages of a specific message type on the topic. The subscriber receives messages whenever new data is published on that topic.</div>
                     <div class="content-division-content">
                         <table>
                             <tr>
-                              <th>Build Type</th>
-                              <th>Supported Languages</th>
-                              <th>Use Cases</th>
+                              <th>Command</th>
+                              <th>Description</th>
                             </tr>
                             <tr>
-                              <td>ament_cmake</td>
-                              <td>C++</td>
-                              <td>Used for C++ implementation and building custom interfaces</td>
+                              <td><code>ros2 topic list</code></td>
+                              <td>List all active topics ros2 topic list</td>
                             </tr>
                             <tr>
-                              <td>ament_python</td>
-                              <td>Python</td>
-                              <td>Used for Python implementation and integrating Python libraries</td>
+                              <td><code>ros2 topic info /chatter</code></td>
+                              <td>Get information about a specific topic</td>
                             </tr>
                             <tr>
-                              <td>ament_cmake_python</td>
-                              <td>C++ and Python</td>
-                              <td>C++ and Python implementations</td>
+                              <td><code>ros2 topic echo /chatter</code></td>
+                              <td>View real-time messages published on a topic</td>
                             </tr>
-                          </table>
+                            <tr>
+                              <td><code>ros2 topic type /chatter</code></td>
+                              <td>Check message type of a topic</td>
+                            </tr>
+                          </table>                          
                     </div>
                 </div>
-                    For deeper understanding of each package build type including the minimum required contents and file structure refer to the ROS 2 Humble documentation.
             </div>
-
             <div class="content-content">
                 <div class="content-h2">Programming</div>
                 <div class="content-division">
-                    <div class="content-division-title">Creating a ROS 2 Workspace</div>
-                    <div class="content-division-content">On top of your underlay workspace, we can create an overlay workspace which you can freely use for development and testing. When locating packages, ROS 2 finds all the packages that are sourced in your environment and this almost always includes the underlay workspace. This happens because we already automatically source the underlay workspace every time we open the terminal in the installation process with this line of code <code class="inline-code-normal">echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc</code>. </div>
-                    <div class="content-division-content">You should already have Git installed in your system to proceed with the tutorial. Otherwise, you can simply download the source code from the provided git repository. Let’s proceed on creating the overlay workspace.</div>
+                    <div class="content-division-title">Creating Subscriber and Publisher Nodes</div>
                     <div class="content-division-content">
                         <ol>
-                            <li>Create a new directory.
-                                <pre><code class="language-bash">mkdir -p ~/ros2_ws/src
-cd ~/ros2_ws/src</code></pre>
+                            <li>Open your terminal.</li>
+                            <li>Create a ROS 2 workspace and navigate into it.
+                                <pre><code class="language-bash">cd ~/ros2_ws/src
+ros2 pkg create --build-type ament_python ros2_learning
+cd ros2_learning</code></pre>
                             </li>
-                            <li>Clone a sample repository.
-                                <pre><code class="language-bash">git clone https://github.com/ros/ros_tutorials.git -b humble</code></pre>
+                            <li>Edit setup.py to include the nodes. Change the maintainer name and maintainer email for submission.
+                                <pre><code class="language-python">from setuptools import setup
+package_name = 'ros2_learning'
+setup(
+    name=package_name,
+    version='0.0.1',
+    packages=[package_name],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    maintainer='your_name',
+    maintainer_email='your_email@example.com',
+    description='A complete ROS 2 package for learning publisher-subscriber and serialization',
+    license='Apache License 2.0',
+    tests_require=['pytest'],
+    entry_points={
+        'console_scripts': [
+            'talker = ros2_learning.talker:main',
+            'listener = ros2_learning.listener:main',
+        ],
+    },
+)</code></pre>
                             </li>
-                            <li>Resolve dependencies.
-                                <pre><code class="language-bash">cd .. # you should be in ros2_ws
-rosdep install -i --from-path src --rosdistro humble -y</code></pre>
+                            <li>Create the publisher node, talker.py.
+                                <pre><code class="language-python">import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+
+class Talker(Node):
+    def __init__(self):
+        super().__init__('talker')
+        self.publisher_ = self.create_publisher(String, 'chatter', 10)
+        self.timer = self.create_timer(1.0, self.publish_message)
+        self.count = 0
+
+    def publish_message(self):
+        msg = String()
+        msg.data = f'Hello, ROS 2! Message {self.count}'
+        self.publisher_.publish(msg)
+        self.get_logger().info(f'Publishing: {msg.data}')
+        self.count += 1
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = Talker()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()</code></pre>
                             </li>
-                            <li>Build the workspace with <code class="inline-code-normal">colcon</code>.
-                                <pre><code class="language-bash">colcon build --symlink-install --packages-select turtlesim</code></pre>
+                            <li>Create the subscriber node, listener.py.
+                                <pre><code class="language-python">import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+import pickle  # Import pickle for serialization
+
+class Listener(Node):
+    def __init__(self):
+        super().__init__('listener')
+        self.subscription = self.create_subscription(String, 'chatter', self.callback, 10)
+
+    def callback(self, msg):
+        serialized = pickle.dumps(msg.data)  # Convert message to bytes
+        deserialized = pickle.loads(serialized)  # Decode message back to string
+
+        self.get_logger().info(f'Received: {msg.data}')
+        self.get_logger().info(f'Serialized: {serialized}')  # Print raw serialized data
+        self.get_logger().info(f'Deserialized: {deserialized}')  # Print decoded message
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = Listener()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()</code></pre>
+                            </li>
+                            <li>Build the package and run it.
+                                <pre><code class="language-python">cd ~/ros2_ws
+colcon build --packages-select ros2_learning
+source install/setup.bash</code></pre>
+                            </li>
+                            <li>Run the talker node in a new terminal.
+                                <pre><code class="language-bash">ros2 run ros2_learning talker</code></pre>
+                                The result should like the image below.
+                                <img src="../assets/img/asset_32.png" alt="" class="screenshot">
+                            </li>
+                            <li>Run the listener node in a separate terminal.
+                                <pre><code class="language-bash">ros2 run ros2_learning listener</code></pre>
+                                The result should like the image below.
+                                <img src="../assets/img/asset_31.png" alt="" class="screenshot">
                             </li>
                         </ol>
                     </div>
                 </div>
                 <div class="content-division">
-                    <div class="content-division-title">Creating a ROS 2 Package in Python</div>
-                    <div class="content-division-content">Make sure you already have built a workspace and you are in the src directory. If you’re not yet, type this in the terminal: <code class="inline-code-normal">cd ~/ros2_ws/src/</code>.</div>
+                    <div class="content-division-title">Creating a Custom Message</div>
                     <div class="content-division-content">
                         <ol>
-                            <li>Create a ROS 2 Python package.
-                                <pre><code class="language-bash">ros2 pkg create --build-type ament_python --node-name my_node my_package</code></pre>
-                                The <code class="inline-code-normal">--build-type</code> option allows you to change the type of package you want to create. The <code class="inline-code-normal">--node-name</code> option allows you to create a node with name my_node under the my_package package. Don’t worry about what nodes are for now. You can change the build type to <code class="inline-code-normal">ament_cmake</code> to create a CMake package. Check the ROS 2 Humble documentation to know more about the differences in the contents and file structure.
-                                <br><br>
+                            <li>Create a separate package under your workspace for the custom messages.
+                                <pre><code class="language-bash">ros2 pkg create --build-type ament_cmake my_custom_msgs</code></pre>
+                                You can see that we used <code class="inline-code-normal">ament_cmake</code> as our build type here. This is because you cannot create custom interfaces like messages with a Python package.
                             </li>
-                            <li>Build the ROS 2 Python package.<br><br>
-                                Be reminded that you shouldn’t be in src but in your workspace whenever you build with colcon.
-                                <pre><code class="language-bash">cd ~/ros2_ws
-colcon build --packages-select my_package --symlink-install</code></pre>
+                            <li>Create a msg directory where messages will be stored.
+                                <pre><code class="language-bash">cd my_custom_msgs && mkdir msg && cd msg</code></pre>
+                            </li>
+                            <li>You can now create a custom message.
+                                <pre><code class="language-bash">code SensorData.msg</code></pre>
+                                Visual Studio Code should open if it is properly installed. Write this in your file.
+                                <pre><code class="language-cpp">float32 temperature
+float32 pressure
+string status</code></pre>
+                            </li>
+                            <li>We should now modify CMakeLists.txt.
+                                The <code class="inline-code-normal">rosidl_default_generators</code> dependency is mandatory because it is responsible for creating the custom message.
+                                <pre><code class="language-text">cmake_minimum_required(VERSION 3.8)
+project(my_custom_msgs)
 
-                                The <code class="inline-code-normal">--packages-select</code> option allows you to build only certain packages. Without that option, all the packages will be reinstalled by default. The <code class="inline-code-normal">--symlink-install</code>  option automatically updates the packages whenever there are changes in the scripts.
-                                <br><br>
-                            </li>
-                            <li>Sourcing the setup file.
-                                <pre><code class="language-bash">source install/local_setup.bash</code></pre>
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
+# Find dependencies
+find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs REQUIRED)  # Ensure std_msgs is found
+
+# Generate custom messages
+rosidl_generate_interfaces(${PROJECT_NAME}
+    "msg/SensorData.msg"
+    DEPENDENCIES std_msgs
+)
+
+# Export dependencies for other packages to use
+ament_export_dependencies(rosidl_default_runtime)
+
+if(BUILD_TESTING)
+    find_package(ament_lint_auto REQUIRED)
+    set(ament_cmake_copyright_FOUND TRUE)
+    set(ament_cmake_cpplint_FOUND TRUE)
+    ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_package()
+                                </code></pre>
                             </li>
-                            <li>Using the package.
-                                <pre><code class="language-bash">ros2 run my_package my_node</code></pre>
-                            </li>
-                            <li>Customizing <code class="inline-code-normal">package.xml</code>.<br><br>
-                                You will see a package.xml after building the package. From there you can modify metadata about your package including the description, maintainer, and license. You can also see dependencies in the same XML file. You can check the ROS 2 documentation of how these tags are used for defining dependencies. For now, modify the package.xml file and write your name as the maintainer, browse open licenses and write it to the license tag, and add a description. The package.xml should look like this:
-                            
+                            <li>Modify the package.xml.
+                                The dependencies are the same for this file.
                                 <pre><code class="language-xml">&lt;?xml version="1.0"?&gt;
-&lt;?xml-model
-   href="http://download.ros.org/schema/package_format3.xsd"
-   schematypens="http://www.w3.org/2001/XMLSchema"?&gt;
+&lt;?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?&gt;
 &lt;package format="3"&gt;
- &lt;name&gt;my_package&lt;/name&gt;
- &lt;version&gt;0.0.0&lt;/version&gt;
- &lt;description&gt;TODO: Package description&lt;/description&gt;
- &lt;maintainer email="user@todo.todo"&gt;user&lt;/maintainer&gt;
- &lt;license&gt;TODO: License declaration&lt;/license&gt;
+    &lt;name&gt;my_custom_msgs&lt;/name&gt;
+    &lt;version&gt;0.0.0&lt;/version&gt;
+    &lt;description&gt;Custom message definitions for ROS 2&lt;/description&gt;
+    &lt;maintainer email="mhiky@todo.todo"&gt;mhiky&lt;/maintainer&gt;
+    &lt;license&gt;Apache-2.0&lt;/license&gt;
 
- &lt;test_depend&gt;ament_copyright&lt;/test_depend&gt;
- &lt;test_depend&gt;ament_flake8&lt;/test_depend&gt;
- &lt;test_depend&gt;ament_pep257&lt;/test_depend&gt;
- &lt;test_depend&gt;python3-pytest&lt;/test_depend&gt;
+    &lt;member_of_group&gt;rosidl_interface_packages&lt;/member_of_group&gt;
 
- &lt;export&gt;
-   &lt;build_type&gt;ament_python&lt;/build_type&gt;
- &lt;/export&gt;
+    &lt;buildtool_depend&gt;ament_cmake&lt;/buildtool_depend&gt;
+
+    &lt;depend&gt;rosidl_default_generators&lt;/depend&gt;
+    &lt;depend&gt;builtin_interfaces&lt;/depend&gt;
+    &lt;depend&gt;std_msgs&lt;/depend&gt;
+
+    &lt;test_depend&gt;ament_lint_auto&lt;/test_depend&gt;
+    &lt;test_depend&gt;ament_lint_common&lt;/test_depend&gt;
+
+    &lt;export&gt;
+    &lt;build_type&gt;ament_cmake&lt;/build_type&gt;
+    &lt;/export&gt;
 &lt;/package&gt;</code></pre>
+                            </li>
+                            <li>Build the package and source the setup file.
+                                <pre><code class="language-bash">cd ~/ros2_ws
+colcon build --packages-select my_custom_msgs
+
+source install/setup.bash</code></pre>
+                            </li>
+                            <li>We can now create a new publisher using our new custom message.
+                                Create new ROS 2 package.
+                                <pre><code class="language-bash">ros2 pkg create --build-type ament_python my_custom_pub</code></pre>
+                                Inside my_custom_pub, modify setup.py to include the message package.
+                                <pre><code class="language-python">entry_points={
+    'console_scripts': [
+        'sensor_publisher = my_custom_pub.sensor_publisher:main',
+    ],
+},
+                                </code></pre>
+                            </li>
+                            <li>Create a Python publisher script inside ros2_ws/src/my_cutom_pub/my_custom_pub, name it as sensor_publisher.py
+                                <pre><code class="language-python">import rclpy
+from rclpy.node import Node
+from my_custom_msgs.msg import SensorData
+import random
+
+class SensorPublisher(Node):
+    def __init__(self):
+        super().__init__('sensor_publisher')
+        self.publisher_ = self.create_publisher(SensorData, 'sensor_topic', 10)
+        self.timer = self.create_timer(1.0, self.publish_sensor_data)
+
+    def publish_sensor_data(self):
+        msg = SensorData()
+        msg.temperature = random.uniform(20.0, 30.0)
+        msg.pressure = random.uniform(1000, 1020)
+        msg.status = "OK"
+        self.publisher_.publish(msg)
+        self.get_logger().info(f'Publishing: {msg.temperature}, {msg.pressure}, {msg.status}')
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = SensorPublisher()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()</code></pre>
+                                Make it an executable file to successfully run it.
+                                <pre><code class="language-bash">chmod +x ~/ros2_ws/src/my_custom_pub/my_custom_pub/sensor_publisher.py</code></pre>
+                            </li>
+                            <li>
+                                Build the new package you created.
+                                <pre><code class="language-bash">cd ~/ros2_ws
+colcon build --packages-select my_custom_pub
+source install/setup.bash</code></pre>
+                            </li>
+                            <li>Run the publisher in a new terminal.
+                                <pre><code class="language-bash">source install/setup.bash
+ros2 run my_custom_pub sensor_publisher
+                                </code></pre>
+                                The terminal should look like the image below.
+                                <img src="../assets/img/asset_33.png" alt="" class="screenshot">
                             </li>
                         </ol>
                     </div>
                 </div>
             </div>
-
             <div class="content-content">
                 <div class="content-h2">Deeper Look at Nabi</div>
                 <div class="content-division">
-                    <div class="content-division-title">Directory Tree</div>
-                    <div class="content-division-content">We used a single workspace in housing the entire codebase for the robot arm called <code class="inline-code-normal">arctos_ws</code>. We separated the packages Provided below is the "tree" directory or the file structure of the codebase of Nabi robot arm.</div>
+                    <div class="content-division-title">Content Title 1</div>
                     <div class="content-division-content">
-                        This is the directory tree of a usual ROS 2 workspace.
-                        <pre><code class="language-bash">arctos_ws
-    ├── build
-    ├── install
-    ├── log
-    └── src </code></pre>
-                    </div>
-                    <div class="content-division-content">
-                        This is the directory tree of the <code class="inline-code-normal">src</code> directory. This shows how different modular pieces of code are separated as packages. Essentially, we can use and share individual packages as long as there isn't dependencies among them. In an attempt to make a cleaner code, we created an interface package which houses all the custom interfaces to promote code reusability.
-                        <pre><code class="language-bash">src/
-    ├── aiagent
-    ├── cancontrol
-    ├── interfaces
-    ├── tests
-    ├── utils
-    └── vision</code></pre>
-                    </div>
-                    <div class="content-division-content">
-                        Let's look deeper at an individual package called <code class="inline-code-normal">aiagent</code>. You can see here that a directory of the same name is created inside it which is the package itself. We'll talk about launch files in the future. You can also see other boilerplate or default files when creating ROS 2 packages here like package.xml and setup.py.
-                        <pre><code class="language-bash">aiagent/
-    ├── aiagent
-    │   ├── agents.py
-    │   ├── __init__.py
-    │   ├── recorder.py
-    │   ├── talker.py
-    │   └── writer.py
-    ├── launch
-    │   ├── audio_launch.py
-    │   └── main_launch.py
-    ├── package.xml
-    ├── resource
-    │   └── aiagent
-    ├── setup.cfg
-    ├── setup.py
-    └── test
-        ├── test_copyright.py
-        ├── test_flake8.py
-        └── test_pep257.py </code></pre> 
+                    Content 1
                     </div>
                 </div>
             </div>
-            
             <div class="content-content">
                 <div class="content-h2">Assignment</div>
                 <div class="content-division">
+                    <div class="content-division-title">Content Title 1</div>
+                    <div class="content-division-content">
                     <ol>
-                        <li>
-                            Create a workspace with your surname as the workspace name.
+                        <li>Create a custom message named CustomMsg.msg that includes:
+                            <ol>
+                                <li>string</li>
+                                <li>int32</li>
+                                <li>float32</li>
+                            </ol>
                         </li>
-                        <li>
-                            Create a package with ament_python build type.
-                        </li>
-                        <li>
-                            Create a package with ament_cmake build type.
-                        </li>
-                        <li>
-                            Change the package.xml file for both builds and change the necessary metadata.
-                        </li>
-                        <li>
-                            Commit it to GitHub with the message “A1 built workspace and packages” then push. Make sure you only have a single branch.
-                        </li>
+                        <li>Create a publisher node to send these messages.</li>
+                        <li>Create a subscriber node to receive and process these messages.</li>
                     </ol>
+                    </div>
                 </div>
             </div>
         </div>
