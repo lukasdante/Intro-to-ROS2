@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <title>Robotics - Week 5</title>
+</head>
+<body>
+    <div class="left-panel">
+        <div class="left-block-panel">
+            <div class="main-title">Introduction to the <br>Robot Operating System 2</div>
+            <div class="distro-title">Humble Hawksbill</div>
+            <div class="mobile-support-flag">Hi! We're glad that you are eager to learn but we currently don't have support for devices with small viewports. The modules contain large images and codeblocks that can only be supported in desktop. We hope to add support for smaller viewports soon!</div>
+        </div>
+        
+        <div class="left-block-panel">
+            <div class="author-name">John Louis D. Lagramada</div>
+            <div class="author-email"><a href="mailto:johnlouis.dante@gmail.com">johnlouis.dante@gmail.com</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="course"><a href="week0.html"><span class="course-week-no">Week 0 </span>Gearing Up</a></div>
+            <div class="course"><a href="week1.html"><span class="course-week-no">Week 1 </span>Introduction to ROS 2</a></div>
+            <div class="course"><a href="week2.html"><span class="course-week-no">Week 2 </span>Object-Oriented Programming</a></div>
+            <div class="course"><a href="week3.html"><span class="course-week-no">Week 3 </span>Nodes, Messages, and Topics</a></div>
+            <div class="course"><a href="week4.html"><span class="course-week-no">Week 4 </span>Parameters</a></div>
+            <div class="course"><a href="week5.html"><span class="course-week-no">Week 5 </span>Custom Launch</a></div>
+            <div class="course"><a href="week6.html"><span class="course-week-no">Week 6 </span>Common ROS 2 Packages</a></div>
+            <div class="course"><a href="week7.html"><span class="course-week-no">Week 7 </span>Services</a></div>
+            <div class="course"><a href="week8.html"><span class="course-week-no">Week 8 </span>Actions</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="final-project">Final Project</div>
+            <div class="final-project-gallery">Gallery of Final Projects</div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="references">References</div>
+            <div class="license">Licenses</div>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="right-block-panel">
+            <div class="content-header">
+                <div class="content-title">Custom Launch</div>
+                <div class="content-author">Written by: Althea R. Villanueva and John Louis D. Lagramada</div>
+                <hr class="content-divider">
+                <div class="content-intro">This section discusses what launch files are, how to create them, and how to remap parameters during launch.</div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Objectives</div>
+                <div class="content-division">
+                    <ul>
+                        <li>Learners will be able to program launch files.</li>
+                        <li>Learners will be able to change parameters during launch.</li>
+                        <li>Learners will be able to manage nodes through scripting during runtime.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Concepts</div>
+                <div class="content-division">
+                    <div class="content-division-title">Launch</div>
+                    <div class="content-division-content">Launch files in ROS 2 are used to start multiple nodes and configure their parameters simultaneously. They are written in XML, Python, or YAML and allow developers to automate the process of starting complex robotic systems. Launch files are particularly useful when you need to start multiple nodes, set parameters, and manage dependencies between nodes.</div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Managing Nodes</div>
+                    <div class="content-division-content">Nodes are the fundamental building blocks of a ROS 2 system. Each node performs a specific task, such as controlling a sensor, processing data, or sending commands to actuators. Launch files allow you to start, stop, and manage nodes during runtime. You can also remap topics, set parameters, and configure namespaces for nodes using launch files.</div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Programming</div>
+                <div class="content-division">
+                    <div class="content-division-title">Creating Launch Files</div>
+                    <div class="content-division-content">
+                        <ol>
+                            <li>Create a ROS 2 package by navigating to your workspace and running the code below.
+                                <pre><code class="language-bash">ros2 pkg create --build-type ament_python emtech</code></pre>
+                                This will generate the necessary structure but it does not contain a launch directory by default. Now, manually create a launch folder inside your package:
+                                <pre><code class="language-bash">mkdir launch</code></pre>
+                                Create a new python file in the launch directory of your package:
+                                <pre><code class="language-bash">code my_launch.py</code></pre>
+                            </li>
+                            <li>
+                                Write this code in your Python launch file.
+                                <pre><code class="language-python">#!/usr/bin/env python3
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    # Define the talker node
+    talker_node = Node(
+        package='demo_nodes_py',
+        executable='talker',
+        name='talker_node',
+        output='screen'
+    )
+
+    # Define the listener node
+    listener_node = Node(
+        package='demo_nodes_py',
+        executable='listener',
+        name='listener_node',
+        output='screen'
+    )
+
+    # Return the launch description
+    return LaunchDescription([
+        talker_node,
+        listener_node
+    ])</code></pre>
+                                This launch file starts with two nodes: a talker node that publishes messages and a listener node that subscribes to those messages.
+                                Ensure that your python file is executable:
+                                <pre><code class="language-bash">chmod +x ~/ros2_ws/src/emtech/launch/my_launch.py</code></pre>
+                            </li>
+                            <li>Build the package and go to ROS 2 workspace directory.
+                                <pre><code class="language-bash">cd ~/ros2_ws
+colcon build --packages-select emtech
+source ~/ros2_ws/install/setup.bash
+                                </code></pre>
+                            </li>
+                            <li>Run your launch file.
+                                <pre><code class="language-bash">ros2 launch emtech my_launch.py</code></pre>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Changing Parameters in a Launch File</div>
+                    <div class="content-division-content">
+                        <ol>
+                            <li>Changing parameters during launch.
+                            Users can set parameters for nodes directly in the launch file. For example, we 	modify the talker node to change the frequency at which it publishes messages. Modify the launch file by updating the talker_node in the launch file to include parameters.
+                            <pre><code class="language-python">talker_node = Node(
+    package='demo_nodes_py',
+    executable='talker',
+    name='talker_node',
+    output='screen',
+    parameters=[{'publish_frequency': 2.0}] 
+)</code></pre>
+                            </li>
+                            <li>Rebuild the package and run the launch file.
+                                <pre><code class="language-bash">colcon build --packages-select emtech
+ros2 launch emtech my_launch.py</code></pre>
+                                You can notice that the talker node now publishes messages at a slower rate. It is because of the parameter you set on the talker_node.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Deeper Look at Nabi</div>
+                <div class="content-division">
+                    <div class="content-division-title">Content Title 1</div>
+                    <div class="content-division-content">Content 1</div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Assignment</div>
+                <div class="content-division">
+                    <ol>
+                        <li>Create a custom launch file.</li>
+                        <li>Modify parameters from your previous work in a launch file.</li>
+                        <li>Commit to GitHub. Submit your launch file to GitHub with the message "Custom Launch File" in your repository.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

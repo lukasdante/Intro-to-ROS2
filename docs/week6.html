@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <title>Robotics - Week 6</title>
+</head>
+<body>
+    <div class="left-panel">
+        <div class="left-block-panel">
+            <div class="main-title">Introduction to the <br>Robot Operating System 2</div>
+            <div class="distro-title">Humble Hawksbill</div>
+            <div class="mobile-support-flag">Hi! We're glad that you are eager to learn but we currently don't have support for devices with small viewports. The modules contain large images and codeblocks that can only be supported in desktop. We hope to add support for smaller viewports soon!</div>
+        </div>
+        
+        <div class="left-block-panel">
+            <div class="author-name">John Louis D. Lagramada</div>
+            <div class="author-email"><a href="mailto:johnlouis.dante@gmail.com">johnlouis.dante@gmail.com</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="course"><a href="week0.html"><span class="course-week-no">Week 0 </span>Gearing Up</a></div>
+            <div class="course"><a href="week1.html"><span class="course-week-no">Week 1 </span>Introduction to ROS 2</a></div>
+            <div class="course"><a href="week2.html"><span class="course-week-no">Week 2 </span>Object-Oriented Programming</a></div>
+            <div class="course"><a href="week3.html"><span class="course-week-no">Week 3 </span>Nodes, Messages, and Topics</a></div>
+            <div class="course"><a href="week4.html"><span class="course-week-no">Week 4 </span>Parameters</a></div>
+            <div class="course"><a href="week5.html"><span class="course-week-no">Week 5 </span>Custom Launch</a></div>
+            <div class="course"><a href="week6.html"><span class="course-week-no">Week 6 </span>Common ROS 2 Packages</a></div>
+            <div class="course"><a href="week7.html"><span class="course-week-no">Week 7 </span>Services</a></div>
+            <div class="course"><a href="week8.html"><span class="course-week-no">Week 8 </span>Actions</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="final-project">Final Project</div>
+            <div class="final-project-gallery">Gallery of Final Projects</div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="references">References</div>
+            <div class="license">Licenses</div>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="right-block-panel">
+            <div class="content-header">
+                <div class="content-title">Common ROS 2 Packages</div>
+                <div class="content-author">Written by: Althea R. Villaneuva and John Louis D. Lagramada</div>
+                <hr class="content-divider">
+                <div class="content-intro">This section discusses common ROS 2 packages which aid in development i.e. RQT graph, ROS bag, and ROS 2 doctor.</div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Objectives</div>
+                <div class="content-division">
+                    <ul>
+                        <li>Learners will be able to use rqt_graph to visualize ROS nodes and topics.</li>
+                        <li>Learners will be able to record and play messages using rosbag2.</li>
+                        <li>Learners will be able to debug a ROS system using ros2doctor.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Concepts</div>
+                <div class="content-division">
+                    <div class="content-division-title">ROS Graph and rqt</div>
+                    <div class="content-division-content">The ROS computational graph consists of various interconnected components such as nodes, topics, services and actions that work together to perform robotic functions. This graph forms the foundation of how data flows within a ROS-based system, enabling robots to process information and react accordingly.</div>
+                    <div class="content-division-content">The components are represented graphically using the rqt_graph tool, which facilitates the visualization of node interactions with topics and services. It helps users understand how data flows across the system through demonstrating nodes as blocks and the arrows that connect them. Developers can analyze system design, find message flow issues, and improve efficiency with rqt_graph.</div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Recording and Playing Messages with rosbag2</div>
+                    <div class="content-division-content"> 	The rosbag2 is an essential tool in ROS 2 that allows users to record and replay messages. For example, a robot is navigating a predefined path using sensor data, the developers can use rosbag2 to record the sensor readings, control commands, and robot state during the initial test runs. The same recorded data can be replayed in a simulation environment to analyze the robot's performance, adjust parameters, or debug unexpected behaviors without requiring the actual robot hardware.</div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Debugging with ROS2 Doctor</div>
+                    <div class="content-division-content">	Ros2doctor is a diagnostic tool in ROS2 that helps the developer identify and troubleshoot issues in their ROS2  environment. It checks system configurations, installed ROS 2 packages, network settings, and other important aspects of the ROS 2 setup. The tool provides useful recommendations and warnings when it detects potential problems.</div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Programming</div>
+                <div class="content-division">
+                    <div class="content-division-title">RQT Graph</div>
+                    <div class="content-division-content">For the demonstration, we will use the turtlesim simulator and rqt tools to demonstrate the common ROS2 packages. This simulator will demonstrate what you can achieve with a real robot or a robot simulation later on, it shows you what ROS 2 performs at the most fundamental level.</div>
+                    <div class="content-division-content">
+                        <ol>
+                            <li>Use the Turtlesim and run this code to start the turtlesim.
+                                <pre><code class="language-bash">ros2 run turtlesim turtlesim_node</code></pre>
+                                A new window should appear like the one below.
+                                <img src="../assets/img/asset_61.png" alt="" class="screenshot">
+                            </li>
+                            <li>Open a new terminal and run this teleoperation program for turtlesim.
+                                <pre><code class="language-bash">ros2 run turtlesim turtle_teleop_key</code></pre>
+                                This node will show you how to control the turtle in the first node with your keyboard.
+                            </li>
+                            <li>Launch the rqt_graph on a separate terminal.
+                                <pre><code class="language-bash">rqt_graph</code></pre>
+                                This will display a graphical representation of the nodes and their connection in 	your ROS 2 system. You can now observe how the turtlesim node interacts with the other nodes in the system. 
+                            </li>
+                            Do not remove the terminals running. We will use that for the next section.
+                        </ol>
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">ROS Bag 2</div>
+                    <div class="content-division-content">Content 1</div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">ROS2 Doctor</div>
+                    <div class="content-division-content">
+                        <ol>
+                            <li>Recording and playing back massages with rosbag2. To start recording messages open a new terminal and run the code below.
+                                <pre><code class="language-bash">ros2 bag record -a</code></pre>
+                            </li>
+                            <li>Control the turtle in the simulator using your keyboard. The keys are showed in the control node, stop the recording and replay the session. You can see the list of the recorded massages by running <code class="inline-code-normal">ls</code>. To replay the messages, run the code below.
+                                <pre><code class="language-bash">ros2 bag play &lt;bag_file&gt;</code></pre>
+                                <img src="../assets/img/asset_62.png" alt="" class="screenshot">
+                                This will show the recorded messages from the nodes. It will show you a replay of the movements in the simulator.
+                            </li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Deeper Look at Nabi</div>
+                <div class="content-division">
+                    <div class="content-division-title">Content Title 1</div>
+                    <div class="content-division-content">Content 1</div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Assignment</div>
+                <div class="content-division">
+                    <ol>
+                        <li>Use turtlesim and use rqt_graph to visualize and provide an interpretation of how nodes communicate in a running ROS 2 system.</li>
+                        <li>Record and replay the movement of turtlesim.</li>
+                        <li>Record a session and visualize how data flows in rqt_graph.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

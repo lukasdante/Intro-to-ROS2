@@ -1,4 +1,4 @@
-# Welcome to TEECE2L!
+# Welcome to Introduction to ROS 2!
 
 This project is an open-source repository for teaching an introductory course to the Robot Operating System 2 (ROS 2). We currently support tutorials and laboratories for the Humble Hawksbill distribution. This website is programmed in just a day! Please submit an issue if you found one. This is an initiative from a small group of young minds that attempted to build something ahead of their time i.e a talking robot arm. We may not be able to disclose the entire source code for the robot that we made because of licensing issues. Anyhow, get ready for a gentle yet cognitively engaging ride!
 

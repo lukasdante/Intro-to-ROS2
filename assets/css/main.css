@@ -193,4 +193,23 @@ table td {
 table tr:first-child th {
   padding-bottom: 10px;
   border-bottom: 1px solid #999999;
+}
+
+.mobile-support-flag {
+  display: none !important;
+}
+
+@media (max-width: 1000px) {
+  .right-panel, .left-block-panel:not(:first-child) {
+    display: none;
+  }
+  .left-panel {
+    width: 100vw;
+    max-width: none;
+  }
+  .mobile-support-flag {
+    display: block !important;
+    margin-top: 20px;
+    font-weight: 500;
+  }
 }/*# sourceMappingURL=main.css.map */
