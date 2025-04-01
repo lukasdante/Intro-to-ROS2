@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <title>Robotics - Week 7</title>
+</head>
+<body>
+    <div class="left-panel">
+        <div class="left-block-panel">
+            <div class="main-title">Introduction to the <br>Robot Operating System 2</div>
+            <div class="distro-title">Humble Hawksbill</div>
+            <div class="mobile-support-flag">Hi! We're glad that you are eager to learn but we currently don't have support for devices with small viewports. The modules contain large images and codeblocks that can only be supported in desktop. We hope to add support for smaller viewports soon!</div>
+        </div>
+        
+        <div class="left-block-panel">
+            <div class="author-name">John Louis D. Lagramada</div>
+            <div class="author-email"><a href="mailto:johnlouis.dante@gmail.com">johnlouis.dante@gmail.com</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="course"><a href="week0.html"><span class="course-week-no">Week 0 </span>Gearing Up</a></div>
+            <div class="course"><a href="week1.html"><span class="course-week-no">Week 1 </span>Introduction to ROS 2</a></div>
+            <div class="course"><a href="week2.html"><span class="course-week-no">Week 2 </span>Object-Oriented Programming</a></div>
+            <div class="course"><a href="week3.html"><span class="course-week-no">Week 3 </span>Nodes, Messages, and Topics</a></div>
+            <div class="course"><a href="week4.html"><span class="course-week-no">Week 4 </span>Parameters</a></div>
+            <div class="course"><a href="week5.html"><span class="course-week-no">Week 5 </span>Custom Launch</a></div>
+            <div class="course"><a href="week6.html"><span class="course-week-no">Week 6 </span>Common ROS 2 Packages</a></div>
+            <div class="course"><a href="week7.html"><span class="course-week-no">Week 7 </span>Services</a></div>
+            <div class="course"><a href="week8.html"><span class="course-week-no">Week 8 </span>Actions</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="final-project">Final Project</div>
+            <div class="final-project-gallery">Gallery of Final Projects</div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="references">References</div>
+            <div class="license">Licenses</div>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="right-block-panel">
+            <div class="content-header">
+                <div class="content-title">Services</div>
+                <div class="content-author">Written by: Jhon Mark Remollo and John Louis D. Lagramada</div>
+                <hr class="content-divider">
+                <div class="content-intro">This section discusses services in ROS2, the request-response model, and how to implement these services in client and server nodes.</div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Objectives</div>
+                <div class="content-division">
+                    <ul>
+                        <li>Learners will be able to understand how services work in ROS.</li>
+                        <li>Learners will be able to understand how request-response model works.</li>
+                        <li>Learners will be able to program services, service node, and client nodes</li>
+                        <li>Learners will be able to demonstrate a custom service in ROS.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Concepts</div>
+                <div class="content-division">
+                    <div class="content-division-title">Services</div>
+                    <div class="content-division-content">When it comes to communicating between nodes in usage, ROS 2 services do so in a request-response manner. In service, a node requests some data from another node and expects one response back. This differs from a topic where it is continuous streaming of data. Thus services are appropriate when such situations arise, as when retrieving sensor data, firing certain behavior, or changing parameters on the fly might be required for a node. In a ROS 2 system, services enable structured communication between nodes using a request-response model. Imagine a scenario where a robot needs to check its battery level before performing a task. Instead of continuously publishing battery data like a topic, the robot can use a service request to retrieve this information only when needed.</div>
+                    <div class="content-division-content">The service can be defined as an interaction between nodes in request and response mode in the ROS 2 system. In order for the client node to obtain information or have something performed, it sends a request to the service server. This server processes the request, returns a response to the client, and hence makes the operation synchronous with the client going ahead only after a response is received. However, if it desires so, the client can perform other unrelated tasks while waiting for the server's response with asynchronous services.</div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Service Message Structure</div>
+                    <div class="content-division-content">Each service type consists of two parts a request data type and a reponse data type which is structured like below.
+                        <pre><code class="language-bash">Request Data Type
+---
+Response Data Type</code></pre>
+                    </div>
+                    <div class="content-division-content">For example, the built-in example_interfaces/srv/AddTwoInts service type is structured as:
+                        <pre><code class="language-bash">int64 a
+int64 b
+--- 
+int64 sum</code></pre>
+                        The request contains two integers (a and b). The response returns a single integer (sum), which is the result of a + b.
+                    </div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Programming</div>
+                <div class="content-division">
+                    <div class="content-division-title">Creating the Service Server Node</div>
+                    <div class="content-division-content">
+                        <ol>
+                            <li>Open a terminal and navigate to your ROS 2 workspace's src directory.
+                                <pre><code class="language-bash">cd ~/ros2_ws/src</code></pre>
+                            </li>
+                            <li>Create a new package named my_service_pkg with Python build type and necessary dependencies.
+                                <pre><code class="language-bash">ros2 pkg create --build-type ament_python my_service_pkg --dependencies rclpy example_interfaces</code></pre>
+                                This command generates the package structure and specifies dependencies like rclpy (ROS 2 Python client library) and example_interfaces (which provides standard service definitions).
+                            </li>
+                            <li>
+                                And then, create a Service Server Node. Inside the my_service_pkg package, create a Python script for the service server. Navigate to the package directory and create a service_server.py file.
+                                <pre><code class="language-bash">cd ~/ros2_ws/src/my_service_pkg/my_service_pkg 
+code service_server.py</code></pre>
+                            </li>
+                            <li>Open service_server.py and implement the service server.
+                                <pre><code class="language-python">#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
+from example_interfaces.srv import AddTwoInts
+
+class AddTwoIntsService(Node):
+
+    def __init__(self):
+        super().__init__('add_two_ints_service')
+        self.srv = self.create_service(AddTwoInts, 'add_two_ints', self.add_two_ints_callback)
+        self.get_logger().info('Service server ready: add_two_ints')
+
+    def add_two_ints_callback(self, request, response):
+        response.sum = request.a + request.b
+        self.get_logger().info(f'Request: {request.a} + {request.b} = {response.sum}')
+        return response
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = AddTwoIntsService()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()</code></pre>
+                                This script defines a service server node that responds to AddTwoInts service requests by computing the sum of two integers.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Creating the Service Client Node</div>
+                    <div class="content-division-content">
+                        <ol>
+                            <li>In the same package directory, create a service_client.py file.
+                                <pre><code class="language-bash">code service_client.py</code></pre>
+                            </li>
+                            <li>Implement the service client in service_client.py.
+                                <pre><code class="language-python">#!/usr/bin/env python3
+import sys
+import rclpy
+from rclpy.node import Node
+from example_interfaces.srv import AddTwoInts
+
+class AddTwoIntsClient(Node):
+
+    def __init__(self):
+        super().__init__('add_two_ints_client')
+        self.client = self.create_client(AddTwoInts, 'add_two_ints')
+        while not self.client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('Service not available, waiting...')
+        self.get_logger().info('Service available, sending request...')
+        self.request = AddTwoInts.Request()
+
+    def send_request(self, a, b):
+        self.request.a = a
+        self.request.b = b
+        self.future = self.client.call_async(self.request)
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = AddTwoIntsClient()
+    a = int(sys.argv[1])
+    b = int(sys.argv[2])
+    node.send_request(a, b)
+
+    while rclpy.ok():
+        rclpy.spin_once(node)
+        if node.future.done():
+            try:
+                response = node.future.result()
+            except Exception as e:
+                node.get_logger().info(f'Service call failed: {e}')
+            else:
+                node.get_logger().info(f'Result: {a} + {b} = {response.sum}')
+            break
+
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()</code></pre>
+                            </li>
+                            <li>Now, make the scripts executable. Ensure that it is executable by navigating the package directory and running the code below.
+                                <pre><code class="language-bash">chmod +x service_server.py service_client.py</code></pre>
+                            </li>
+                            <li>Afterwards, modify the setup.py. Update the setup.py file to include the new executables. Open setup.py and modify the entry_points section.
+                                <pre><code class="language-python">entry_points={
+    'console_scripts': [
+        'service_server = my_service_pkg.service_server:main',
+        'service_client = my_service_pkg.service_client:main',
+    ],
+},</code></pre>
+                            </li>
+                            <li>Now, build a package. Return to the root of your workspace and build the package using colcon:
+                                <pre><code class="language-bash">cd ~/ros2_ws
+colcon build --packages-select my_service_pkg
+source install/setup.bash</code></pre>
+                            </li>
+                            <li>Run the Service Server and Client. Open a terminal and run the service server.
+                                <pre><code class="language-bash">ros2 run my_service_pkg service_server</code></pre>
+                            </li>
+                            <li>In another terminal, run the service client with two integer arguments.
+                                <pre><code class="language-bash">ros2 run my_service_pkg service_client 3 5</code></pre>
+                                The client will provide a request to add 3 and 5, and the server will respond with the sum, displaying the result in the client's terminal. 
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Deeper Look at Nabi</div>
+                <div class="content-division">
+                    <div class="content-division-title">Content Title 1</div>
+                    <div class="content-division-content">Content 1</div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Assignment</div>
+                <div class="content-division">
+                    <ol>
+                        <li>Define new ones within your package that accomplish distinct tasks, for instance, multiplication of two numbers or string concatenation. Implement server and client nodes for your custom service.</li>
+                        <li>Rearrange the server node to invoke a free web API.</li>
+                        <li>Make a push of your application code to any version control system such as GitHub using the commit message: "ROS 2 Services Implementation."</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

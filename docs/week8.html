@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <title>Robotics - Week 8</title>
+</head>
+<body>
+    <div class="left-panel">
+        <div class="left-block-panel">
+            <div class="main-title">Introduction to the <br>Robot Operating System 2</div>
+            <div class="distro-title">Humble Hawksbill</div>
+            <div class="mobile-support-flag">Hi! We're glad that you are eager to learn but we currently don't have support for devices with small viewports. The modules contain large images and codeblocks that can only be supported in desktop. We hope to add support for smaller viewports soon!</div>
+        </div>
+        
+        <div class="left-block-panel">
+            <div class="author-name">John Louis D. Lagramada</div>
+            <div class="author-email"><a href="mailto:johnlouis.dante@gmail.com">johnlouis.dante@gmail.com</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="course"><a href="week0.html"><span class="course-week-no">Week 0 </span>Gearing Up</a></div>
+            <div class="course"><a href="week1.html"><span class="course-week-no">Week 1 </span>Introduction to ROS 2</a></div>
+            <div class="course"><a href="week2.html"><span class="course-week-no">Week 2 </span>Object-Oriented Programming</a></div>
+            <div class="course"><a href="week3.html"><span class="course-week-no">Week 3 </span>Nodes, Messages, and Topics</a></div>
+            <div class="course"><a href="week4.html"><span class="course-week-no">Week 4 </span>Parameters</a></div>
+            <div class="course"><a href="week5.html"><span class="course-week-no">Week 5 </span>Custom Launch</a></div>
+            <div class="course"><a href="week6.html"><span class="course-week-no">Week 6 </span>Common ROS 2 Packages</a></div>
+            <div class="course"><a href="week7.html"><span class="course-week-no">Week 7 </span>Services</a></div>
+            <div class="course"><a href="week8.html"><span class="course-week-no">Week 8 </span>Actions</a></div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="final-project">Final Project</div>
+            <div class="final-project-gallery">Gallery of Final Projects</div>
+        </div>
+        <hr class="left-panel-divider">
+        <div class="left-block-panel">
+            <div class="references">References</div>
+            <div class="license">Licenses</div>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="right-block-panel">
+            <div class="content-header">
+                <div class="content-title">Actions</div>
+                <div class="content-author">Written by: Nicamae G. Tamundong and John Louis D. Lagramada</div>
+                <hr class="content-divider">
+                <div class="content-intro">This section discusses actions in ROS 2, the goal-feedback-result mechanism, and how to implement these actions in a high-level manner.</div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Objectives</div>
+                <div class="content-division">
+                    <ul>
+                        <li>Learners will be able to understand how actions work in ROS.</li>
+                        <li>Learners will be able to define goal, feedback, and result in different robotic settings.</li>
+                        <li>Learners will be able to program actions in ROS.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Concepts</div>
+                <div class="content-division">
+                    <div class="content-division-title">Actions</div>
+                    <div class="content-division-content">Actions in ROS 2 are a communication system designed for long-running tasks. Unlike services, which operate on a simple request-response model with a single reply, actions allow for continuous feedback and the ability to cancel goals dynamically.</div>
+                    <div class="content-division-content">Actions follow a client-server model:
+                        <li>Action Server: A node that provides an action. It receives goals, processes them, and sends feedback and results.</li>
+                        <li>Action Client: A node that sends goals to the action server and can receive feedback and results.</li>
+                    </div>
+                    <div class="content-division-content"><img src="../assets/img/asset_81.png" alt="" class="screenshot"></div>
+                    <div class="content-division-content">A complete action consists of three parts:
+
+                        <li>Goal: The client sends a request to perform a task.</li>
+                        <li>Feedback: The server periodically updates the client on progress.</li>
+                        <li>Result: The outcome of the task is sent back to the client.</li>
+                        </div>
+                    <div class="content-division-content">In this activity, we will use turtlesim as an example and demonstrate the RotateAbsolute action it provides.
+                        <li>The action client will send a goal to rotate the turtle by 90 degrees (1.57 radians).</li>
+                        <li>The action server (already built into turtlesim) will execute the motion.</li>
+                        <li>The client will receive feedback about the rotation progress and a result when the action is completed.</li>
+                        This communication between client and server allows the turtle’s movement to be monitored, adjusted, or even canceled before completion.
+                    </div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Programming</div>
+                <div class="content-division">
+                    <div class="content-division-content">
+                        <ol>
+                            <li>Create a ROS 2 package and navigate into it.
+                                <pre><code class="language-bash">cd ~/ros2_ws/src
+ros2 pkg create --build-type ament_python action_client_pkg
+cd action_client_pkg</code></pre>
+                            </li>
+                            <li>Create the directory and a file for the action script.
+                                <pre><code class="language-bash">mkdir -p action
+code action/action_client.py</code></pre>
+                            </li>
+                            <li>Implement the action to a node.
+                                <pre><code class="language-python">import rclpy
+from rclpy.node import Node
+from rclpy.action import ActionClient
+from turtlesim.action import RotateAbsolute
+from rclpy.task import Future
+
+class RotateTurtleClient(Node):
+    def __init__(self):
+        super().__init__('rotate_turtle_client')
+        self.action_client = ActionClient(self, RotateAbsolute, '/turtle1/rotate_absolute')
+
+    def send_goal(self, theta):
+        goal_msg = RotateAbsolute.Goal()
+        goal_msg.theta = theta
+        self.action_client.wait_for_server()
+        self.get_logger().info(f'Sending goal: Rotate {theta} radians')
+        self.send_goal_future = self.action_client.send_goal_async(goal_msg)
+        self.send_goal_future.add_done_callback(self.goal_response_callback)
+
+    def goal_response_callback(self, future: Future):
+        goal_handle = future.result()
+        if not goal_handle.accepted:
+            self.get_logger().info('Goal rejected')
+            return
+        self.get_logger().info('Goal accepted')
+        self.get_result_future = goal_handle.get_result_async()
+        self.get_result_future.add_done_callback(self.get_result_callback)
+
+    def get_result_callback(self, future: Future):
+        result = future.result().result
+        self.get_logger().info(f'Goal finished with result: {result.delta}')
+        rclpy.shutdown()
+
+def main():
+    rclpy.init()
+    client = RotateTurtleClient()
+    client.send_goal(1.57)  # Rotate 90 degrees
+    rclpy.spin(client)
+
+if __name__ == '__main__':
+    main()
+
+</code></pre>
+                            </li>
+                            <li>Update the setup.py script to include the node.
+                                <pre><code class="language-bash">code setup.py</code></pre>
+                                <pre><code class="language-python">entry_points={
+    'console_scripts': [
+        'rotate_turtle = action_client_pkg.action_client:main',
+    ],
+},</code></pre>
+                            </li>
+                            <li>Build the ROS 2 workspace including the new package.
+                                <pre><code class="language-bash">cd ~/ros2_ws
+colcon build --packages-select action_client_pkg
+source install/setup.bash</code></pre>
+                            </li>
+                            <li>Then run the action client by first running the turtelsim_node.
+                                <pre><code class="language-bash">ros2 run turtlesim turtlesim_node</code></pre>
+                            </li>
+                            <li>Open another terminal to run your action client.
+                                <pre><code class="language-bash">source install/setup.bash
+ros2 run action_client_pkg rotate_turtle</code></pre>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Deeper Look at Nabi</div>
+                <div class="content-division">
+                    <div class="content-division-title">Content Title 1</div>
+                    <div class="content-division-content">Content 1</div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Assignment</div>
+                <div class="content-division">
+                    <ol>
+                        <li>Modify the action client to:
+                            <ol type="A">
+                                <li>Accept user input for the rotation angle.</li>
+                                <li>Print real-time feedback until the goal is completed.</li>
+                            </ol>
+                        </li>
+                        <li>Implement an action server that moves the turtle in a square pattern.</li>
+                        <li>Implement goal cancellation before the rotation is completed.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
