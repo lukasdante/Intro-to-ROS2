@@ -196,7 +196,7 @@ if __name__ == '__main__':
                             <li>Now, make the scripts executable. Ensure that it is executable by navigating the package directory and running the code below.
                                 <pre><code class="language-bash">chmod +x service_server.py service_client.py</code></pre>
                             </li>
-                            <li>Afterwards, modify the setup.py. Update the setup.py file to include the new executables. Open setup.py and modify the entry_points section.
+                            <li>Afterwards, modify the <code class="inline-code-normal">setup.py</code>. Update the <code class="inline-code-normal">setup.py</code> file to include the new executables. Open <code class="inline-code-normal">setup.py</code> and modify the entry_points section.
                                 <pre><code class="language-python">entry_points={
     'console_scripts': [
         'service_server = my_service_pkg.service_server:main',

@@ -139,7 +139,7 @@
                 </div>
                 <div class="content-division">
                     <div class="content-division-title">Packages</div>
-                    <div class="content-division-content">The organizational units of code in ROS 2 are packages. Packages allow developers to share and collaborate their work with other developers. Packages, like workspaces, allow you to organize your code into different modular components. The packages are built using ament which supports CMake and Python build types using ament_cmake and ament_python, respectively. The different build types and their corresponding language support and use-cases are summarized in the figure below.</div>
+                    <div class="content-division-content">The organizational units of code in ROS 2 are packages. Packages allow developers to share and collaborate their work with other developers. Packages, like workspaces, allow you to organize your code into different modular components. The packages are built using ament which supports CMake and Python build types using <code class="inline-code-normal">ament_cmake</code> and <code class="inline-code-normal">ament_python</code>, respectively. The different build types and their corresponding language support and use-cases are summarized in the figure below.</div>
                     <div class="content-division-content">
                         <table>
                             <tr>
@@ -172,7 +172,8 @@
                 <div class="content-h2">Programming</div>
                 <div class="content-division">
                     <div class="content-division-title">Creating a ROS 2 Workspace</div>
-                    <div class="content-division-content">On top of your underlay workspace, we can create an overlay workspace which you can freely use for development and testing. When locating packages, ROS 2 finds all the packages that are sourced in your environment and this almost always includes the underlay workspace. This happens because we already automatically source the underlay workspace every time we open the terminal in the installation process with this line of code <code class="inline-code-normal">echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc</code>. </div>
+                    <div class="content-division-content">On top of your underlay workspace, we can create an overlay workspace which you can freely use for development and testing. When locating packages, ROS 2 finds all the packages that are sourced in your environment and this almost always includes the underlay workspace. This happens because we already automatically source the underlay workspace every time we open the terminal in the installation process with this line of code 
+                        <pre><code class="language-bash">echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc</code></pre>
                     <div class="content-division-content">You should already have Git installed in your system to proceed with the tutorial. Otherwise, you can simply download the source code from the provided git repository. Let’s proceed on creating the overlay workspace.</div>
                     <div class="content-division-content">
                         <ol>
@@ -219,7 +220,7 @@ colcon build --packages-select my_package --symlink-install</code></pre>
                                 <pre><code class="language-bash">ros2 run my_package my_node</code></pre>
                             </li>
                             <li>Customizing <code class="inline-code-normal">package.xml</code>.<br><br>
-                                You will see a package.xml after building the package. From there you can modify metadata about your package including the description, maintainer, and license. You can also see dependencies in the same XML file. You can check the ROS 2 documentation of how these tags are used for defining dependencies. For now, modify the package.xml file and write your name as the maintainer, browse open licenses and write it to the license tag, and add a description. The package.xml should look like this:
+                                You will see a <code class="inline-code-normal">package.xml</code> after building the package. From there you can modify metadata about your package including the description, maintainer, and license. You can also see dependencies in the same XML file. You can check the ROS 2 documentation of how these tags are used for defining dependencies. For now, modify the <code class="inline-code-normal">package.xml</code> file and write your name as the maintainer, browse open licenses and write it to the license tag, and add a description. The <code class="inline-code-normal">package.xml</code> should look like this:
                             
                                 <pre><code class="language-xml">&lt;?xml version="1.0"?&gt;
 &lt;?xml-model
@@ -271,7 +272,7 @@ colcon build --packages-select my_package --symlink-install</code></pre>
     └── vision</code></pre>
                     </div>
                     <div class="content-division-content">
-                        Let's look deeper at an individual package called <code class="inline-code-normal">aiagent</code>. You can see here that a directory of the same name is created inside it which is the package itself. We'll talk about launch files in the future. You can also see other boilerplate or default files when creating ROS 2 packages here like package.xml and setup.py.
+                        Let's look deeper at an individual package called <code class="inline-code-normal">aiagent</code>. You can see here that a directory of the same name is created inside it which is the package itself. We'll talk about launch files in the future. You can also see other boilerplate or default files when creating ROS 2 packages here like <code class="inline-code-normal">package.xml</code> and setup.py.
                         <pre><code class="language-bash">aiagent/
     ├── aiagent
     │   ├── agents.py
@@ -303,13 +304,13 @@ colcon build --packages-select my_package --symlink-install</code></pre>
                             Create a workspace with your surname as the workspace name.
                         </li>
                         <li>
-                            Create a package with ament_python build type.
+                            Create a package with <code class="inline-code-normal">ament_python</code> build type.
                         </li>
                         <li>
-                            Create a package with ament_cmake build type.
+                            Create a package with <code class="inline-code-normal">ament_cmake</code> build type.
                         </li>
                         <li>
-                            Change the package.xml file for both builds and change the necessary metadata.
+                            Change the <code class="inline-code-normal">package.xml</code> file for both builds and change the necessary metadata.
                         </li>
                         <li>
                             Commit it to GitHub with the message “A1 built workspace and packages” then push. Make sure you only have a single branch.

@@ -150,34 +150,12 @@
                     <div class="content-division-content">
                         <ol>
                             <li>Open your terminal.</li>
-                            <li>Create a ROS 2 workspace and navigate into it.
+                            <li>Create a ROS 2 package and navigate into it.
                                 <pre><code class="language-bash">cd ~/ros2_ws/src
-ros2 pkg create --build-type ament_python ros2_learning
-cd ros2_learning</code></pre>
+ros2 pkg create --build-type ament_python a_nodes
+cd a_nodes</code></pre>
                             </li>
-                            <li>Edit setup.py to include the nodes. Change the maintainer name and maintainer email for submission.
-                                <pre><code class="language-python">from setuptools import setup
-package_name = 'ros2_learning'
-setup(
-    name=package_name,
-    version='0.0.1',
-    packages=[package_name],
-    install_requires=['setuptools'],
-    zip_safe=True,
-    maintainer='your_name',
-    maintainer_email='your_email@example.com',
-    description='A complete ROS 2 package for learning publisher-subscriber and serialization',
-    license='Apache License 2.0',
-    tests_require=['pytest'],
-    entry_points={
-        'console_scripts': [
-            'talker = ros2_learning.talker:main',
-            'listener = ros2_learning.listener:main',
-        ],
-    },
-)</code></pre>
-                            </li>
-                            <li>Create the publisher node, talker.py.
+                            <li>Once inside the package, create the publisher node called <code class="inline-code-normal">talker.py</code>. This Python file must be inside the Python package folder (same level as <code class="inline-code-normal">__init__.py</code>).
                                 <pre><code class="language-python">import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
@@ -203,7 +181,7 @@ def main(args=None):
     node.destroy_node()
     rclpy.shutdown()</code></pre>
                             </li>
-                            <li>Create the subscriber node, listener.py.
+                            <li>In the same directory, create the subscriber node, <code class="inline-code-normal">listener.py</code>.
                                 <pre><code class="language-python">import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
@@ -229,18 +207,41 @@ def main(args=None):
     node.destroy_node()
     rclpy.shutdown()</code></pre>
                             </li>
+                            <li>
+                                Edit <code class="inline-code-normal">setup.py</code> to include the nodes. Change the maintainer name and maintainer email for submission.
+                                    <pre><code class="language-python">from setuptools import setup
+package_name = 'a_nodes'
+setup(
+    name=package_name,
+    version='0.0.1',
+    packages=[package_name],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    maintainer='your_name',
+    maintainer_email='your_email@example.com',
+    description='A complete ROS 2 package for learning publisher-subscriber and serialization',
+    license='Apache License 2.0',
+    tests_require=['pytest'],
+    entry_points={
+        'console_scripts': [
+            'talker = a_nodes.talker:main',
+            'listener = a_nodes.listener:main',
+        ],
+    },
+)</code></pre>
+                            </li>
                             <li>Build the package and run it.
                                 <pre><code class="language-python">cd ~/ros2_ws
-colcon build --packages-select ros2_learning
+colcon build --packages-select a_nodes
 source install/setup.bash</code></pre>
                             </li>
                             <li>Run the talker node in a new terminal.
-                                <pre><code class="language-bash">ros2 run ros2_learning talker</code></pre>
+                                <pre><code class="language-bash">ros2 run a_nodes talker</code></pre>
                                 The result should like the image below.
                                 <img src="img/asset_32.png" alt="" class="screenshot">
                             </li>
                             <li>Run the listener node in a separate terminal.
-                                <pre><code class="language-bash">ros2 run ros2_learning listener</code></pre>
+                                <pre><code class="language-bash">ros2 run a_nodes listener</code></pre>
                                 The result should like the image below.
                                 <img src="img/asset_31.png" alt="" class="screenshot">
                             </li>
@@ -334,7 +335,7 @@ source install/setup.bash</code></pre>
                             <li>We can now create a new publisher using our new custom message.
                                 Create new ROS 2 package.
                                 <pre><code class="language-bash">ros2 pkg create --build-type ament_python my_custom_pub</code></pre>
-                                Inside my_custom_pub, modify setup.py to include the message package.
+                                Inside my_custom_pub, modify <code class="inline-code-normal">setup.py</code> to include the message package.
                                 <pre><code class="language-python">entry_points={
     'console_scripts': [
         'sensor_publisher = my_custom_pub.sensor_publisher:main',

@@ -189,50 +189,39 @@
                         <span class="boldtext">Tip:</span> Type CTRL + ALT + T to open a terminal or CTRL + SHIFT + T to add a new terminal tab. You need a terminal to run the code below.
                         <ol>
                             <li>Set locale.
-    <div class="code-container">
-        <pre><code class="language-bash">locale  # check for UTF-8
-    sudo apt update && sudo apt install locales
-    sudo locale-gen en_US en_US.UTF-8
-    sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-    export LANG=en_US.UTF-8
-    locale  # verify settings</code></pre>  
-    </div>                         
+<div class="code-container">
+    <pre><code class="language-bash">locale  # check for UTF-8
+sudo apt update && sudo apt install locales
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+locale  # verify settings</code></pre>  
+</div>                         
                             </li>
-    
-                            <li>If the error <code class="inline-code-error">user is not in sudoers file</code> appeared, perform the code below.
-                            <pre><code class="language-bash">su root</code></pre>
-                            Provide your password then the terminal will show a different prompt like <code class="inline-code-normal">root@user:/home/user</code>.
-                            <pre><code class="language-bash">nano /etc/sudoers</code></pre>
-                            Add your username to the sudoers file be. Change the username user to the username you used during installation.
-                            <pre><code class="language-bash">user	ALL=(ALL) ALL</code></pre>
-                            Your terminal should look like the one below, replace user with the proper username. To save, type CTRL + O then ENTER, it should be saved by now. Exit with CTRL + X. Type exit to leave root.
-                            <img src="img/asset_041.png" alt="" class="screenshot small">
-                            </li>
-    
                             <li>
                                 Setup sources
-    <pre><code class="language-bash">sudo apt install software-properties-common
-    sudo add-apt-repository universe
-    sudo apt update && sudo apt install curl -y
-                                    
-    sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
-                                    
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null</code></pre>
+<pre><code class="language-bash">sudo apt install software-properties-common
+sudo add-apt-repository universe
+sudo apt update && sudo apt install curl -y
+                                
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+                                
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null</code></pre>
                             </li>
     
                             <li>
                                 Install ROS 2 Humble.
-    <pre><code class="language-bash">sudo apt update
-    sudo apt upgrade
-    sudo apt install ros-humble-desktop
-    sudo apt install '~nros-humble-rqt*'
-    sudo apt install python3-colcon-common-extensions
-    sudo apt install python3-rosdep2
-    sudo apt install ros-humble-rqt-graph
-    sudo apt install ros-humble-turtlesim
-    sudo apt install git
-    rosdep update
-    echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc</code></pre>
+<pre><code class="language-bash">sudo apt update
+sudo apt upgrade
+sudo apt install ros-humble-desktop
+sudo apt install '~nros-humble-rqt*'
+sudo apt install python3-colcon-common-extensions
+sudo apt install python3-rosdep2
+sudo apt install ros-humble-rqt-graph
+sudo apt install ros-humble-turtlesim
+sudo apt install git
+rosdep update
+echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc</code></pre>
                             </li>
     
                             <li>Verify installation. Open a terminal and run this code.
@@ -242,7 +231,34 @@
                             </li>
                             
                         </ol>
-                        Congrats! &#127881; If the installation is successful, you should see the same messages being printed on both terminals. The talker node is publishing those messages to the listener node.
+                        If the installation is successful, you should see the same messages being printed on both terminals. The talker node is publishing those messages to the listener node.
+                        <br>
+                        Congrats! &#127881; 
+                    </div>
+                </div>
+            </div>
+            <div class="content-content">
+                <div class="content-h2">Known Issues</div>
+                <div class="content-division">
+                    <div class="content-division-title">[sudo] user not in sudoers file</div>
+                    <div class="content-division-content">
+                        If the error <code class="inline-code-error">user is not in sudoers file</code> appeared, perform the code below.
+                        <pre><code class="language-bash">su root</code></pre>
+                        Provide your password then the terminal will show a different prompt like <code class="inline-code-normal">root@user:/home/user</code>.
+                        <pre><code class="language-bash">nano /etc/sudoers</code></pre>
+                        Add your username to the sudoers file be. Change the username user to the username you used during installation.
+                        <pre><code class="language-bash">user	ALL=(ALL) ALL</code></pre>
+                        Your terminal should look like the one below, replace user with the proper username. To save, type CTRL + O then ENTER, it should be saved by now. Exit with CTRL + X. Type exit to leave root.
+                        <img src="img/asset_041.png" alt="" class="screenshot small">
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">[Git] Author identity unknown.</div>
+                    <div class="content-division-content">
+                        If the error <code class="inline-code-error">Author identity unknown.</code> appears whenever you use git for the first time, perform the code below. We assume that you have your GitHub account ready. Change "you@example.com" to your email and "Your Name" to your name.
+                        <pre><code class="language-bash">git config --global user.email "you@example.com"
+git config --global user.name "Your Name"</code></pre>
+                        This will setup your GitHub account globally in your device.
                     </div>
                 </div>
             </div>
