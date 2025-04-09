@@ -115,7 +115,7 @@
                 <div class="content-division">
                     <div class="content-division-title">Remapping</div>
                     <div class="content-division-content">Topics, parameters, and services are identified by Names. Names are hard coded in ROS nodes, but they can be changed at runtime through remapping. Without remapping every instance of a node would require changes in code. It also allows users to change the names of parameters at runtime without modifying the source code. This is particularly useful when running multiple instances of the same node or integrating different components and allows reusing the same node executable in different parts of the system.</div>
-                    <div class="content-division-content">Parameter remapping enables dynamically adjusting the node's parameters either through the command line (CLI) or using a launch file. You can remap parameters directly when launching a ROS 2 node using the --ros-args option. This command launches my_node while setting the parameter_example1 parameter to 2.0.</div>
+                    <div class="content-division-content">Parameter remapping enables dynamically adjusting the node's parameters either through the command line (CLI) or using a launch file. You can remap parameters directly when launching a ROS 2 node using the <code class="inline-code-normal">--ros-args</code> option. This command launches <code class="inline-code-normal">my_node</code> while setting the <code class="inline-code-normal">parameter_example1</code> parameter to 2.0.</div>
                     <div class="content-division-content"><pre><code class="language-bash">ros2 run my_package my_node --ros-args -p parameter_example1:=2.0</code></pre></div>
                     <div class="content-division-content"></div>
                 </div>
@@ -127,11 +127,11 @@
                     <div class="content-division-content">
                         <ol>
                             <li>Open your terminal.</li>
-                            <li>Create a ROS 2 workspace and navigate into it. Also, create a new package named param_tutorial.
+                            <li>Create a ROS 2 workspace and navigate into it. Also, create a new package named <code class="inline-code-normal">c_parameters</code>.
                                 <pre><code class="language-bash">cd ~/ros2_ws/src
-ros2 pkg create param_tutorial --build-type ament_python --dependencies rclpy</code></pre>
+ros2 pkg create c_parameters --build-type ament_python --dependencies rclpy</code></pre>
                             </li>
-                            <li>Write a ROS 2 node with parameters. Now, create a Python script that declares and uses parameters. In your package directory, /ros2_ws/src/param_tutorial/param_tutorial. Create a python file named param_node.py
+                            <li>Write a ROS 2 node with parameters. Now, create a Python script that declares and uses parameters. In your package directory, <code class="inline-code-normal">/ros2_ws/src/c_parameters/c_parameters</code>. Create a python file named <code class="inline-code-normal">param_node.py</code> 
                                 <pre><code class="language-python">import rclpy
 from rclpy.node import Node
 
@@ -163,22 +163,21 @@ if __name__ == '__main__':
                             <li>Make the script executable by giving it permission.
                                 <pre><code class="language-bash">chmod +x param_node.py</code></pre>
                                 Open <code class="inline-code-normal">setup.py</code> to add the executable.
-                                <pre><code class="language-bash">code ~/ros2_ws/src/param_tutorial/setup.py</code></pre>
+                                <pre><code class="language-bash">code ~/ros2_ws/src/c_parameters/setup.py</code></pre>
                                 Modify the entry points as follows:
                                 <pre><code class="language-python">entry_points={
     'console_scripts': [
-        'param_node = param_tutorial.param_node:main',
+        'param_node = c_parameters.param_node:main',
     ],
 },</code></pre>
                             </li>
                             <li>Build the workspace.
                                 <pre><code class="language-bash">cd ~/ros2_ws
-colcon build --packages-select param_tutorial
-source install/setup.bash
-                                </code></pre>
+colcon build --packages-select c_parameters
+source install/setup.bash</code></pre>
                             </li>
                             <li>Run the node in the same terminal.
-                                <pre><code class="language-bash">ros2 run param_tutorial param_node</code></pre>
+                                <pre><code class="language-bash">ros2 run c_parameters param_node</code></pre>
                                 The terminal should log the robot name and speed parameters as shown below.
                                 <img src="img/asset_41.png" alt="" class="screenshot">
                             </li>
@@ -190,7 +189,7 @@ source install/setup.bash
                     <div class="content-division-content">
                         <ol>
                             <li>Remap parameters using command line interface. You can override parameters when running the node:
-                                <pre><code class="language-bash">ros2 run param_tutorial param_node --ros-args -p robot_name:=Nabi -p speed:=2.5</code></pre>
+                                <pre><code class="language-bash">ros2 run c_parameters param_node --ros-args -p robot_name:=Nabi -p speed:=2.5</code></pre>
                                 The printed parameters should be different now as per below.
                                 <img src="img/asset_42.png" alt="" class="screenshot">
                                 We will learn more about remapping parameters in custom launch files in the next module.
@@ -202,7 +201,15 @@ source install/setup.bash
             <div class="content-content">
                 <div class="content-h2">Deeper Look at Nabi</div>
                 <div class="content-division">
-                    <div class="content-division-title">Content Title 1</div>
+                    <div class="content-division-title">Parameters</div>
+                    <div class="content-division-content">Content 1</div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Namespaces</div>
+                    <div class="content-division-content">Content 1</div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Changing Parameters with Vocal Interface</div>
                     <div class="content-division-content">Content 1</div>
                 </div>
             </div>
@@ -210,14 +217,34 @@ source install/setup.bash
                 <div class="content-h2">Assignment</div>
                 <div class="content-division">
                     <ol>
-                        <li>Creating a ROS 2 node with parameters.
-                            <ol type="A">
-                                <li>Set a minimum and maximum limit for speed_limit.</li>
-                                <li>If speed_limit is set beyond the range 1-50, log a warning and reset to default.</li>
-                            </ol>
+                        <li>Create these parameters inside your nodes.
+                            <ul>
+                                <li>For the voice node:
+                                    <ul>
+                                        <li><code>language</code></li>
+                                        <li><code>sensitivity</code></li>
+                                        <li><code>safety_mode</code></li>
+                                    </ul>
+                                </li>
+                                <li>For the vision node:
+                                    <ul>
+                                        <li><code>detection_threshold</code></li>
+                                        <li><code>frame_rate</code></li>
+                                        <li><code>color_mode</code></li>
+                                    </ul>
+                                </li>
+                                <li>For the arm node:
+                                    <ul>
+                                        <li><code>max_speed</code></li>
+                                        <li><code>default_pose</code></li>
+                                        <li><code>mode</code></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
-                        <li>Implement parameter remapping using the command line.</li>
-                        <li>Implement parameter remapping in a launch file.</li>
+                        <li>Change a parameter at runtime using <code class="inline-code-normal">ros2 param set</code>.</li>
+                        <li>Change a parameter using remapping during terminal launch.</li>
+                        <li>Commit it to GitHub with the message “A4 added parameters” then push. Make sure you only have a single branch.</li>
                     </ol>
                 </div>
             </div>

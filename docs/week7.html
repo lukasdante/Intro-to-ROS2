@@ -231,9 +231,20 @@ source install/setup.bash</code></pre>
                 <div class="content-h2">Assignment</div>
                 <div class="content-division">
                     <ol>
-                        <li>Define new ones within your package that accomplish distinct tasks, for instance, multiplication of two numbers or string concatenation. Implement server and client nodes for your custom service.</li>
-                        <li>Rearrange the server node to invoke a free web API.</li>
-                        <li>Make a push of your application code to any version control system such as GitHub using the commit message: "ROS 2 Services Implementation."</li>
+                        <li>Create a service with an interface called <code class="inline-code-normal">GetCommand.srv</code> which is defined below. The arm and vision nodes are clients to this service.<br>
+                            <pre><code class="language-bash">string raw_text
+---
+string intent
+string target_object</code></pre>
+                        </li>
+                        <li>Create a service with an interface called <code class="inline-code-normal">GetObjectInfo.srv</code> which is defined below. The arm and voice nodes are clients to this service.<br>
+                            <pre><code class="language-bash">string object_label
+---
+bool detected
+float32 confidence
+string description</code></pre>
+                        </li>
+                        <li>Commit it to GitHub with the message “A7 added services” then push. Make sure you only have a single branch.</li>
                     </ol>
                 </div>
             </div>

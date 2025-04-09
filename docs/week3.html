@@ -253,11 +253,11 @@ source install/setup.bash</code></pre>
                     <div class="content-division-content">
                         <ol>
                             <li>Create a separate package under your workspace for the custom messages.
-                                <pre><code class="language-bash">ros2 pkg create --build-type ament_cmake my_custom_msgs</code></pre>
+                                <pre><code class="language-bash">ros2 pkg create --build-type ament_cmake b_messages</code></pre>
                                 You can see that we used <code class="inline-code-normal">ament_cmake</code> as our build type here. This is because you cannot create custom interfaces like messages with a Python package.
                             </li>
-                            <li>Create a msg directory where messages will be stored.
-                                <pre><code class="language-bash">cd my_custom_msgs && mkdir msg && cd msg</code></pre>
+                            <li>Create a <code class="inline-code-normal">msg</code> directory where messages will be stored.
+                                <pre><code class="language-bash">cd b_messages && mkdir msg && cd msg</code></pre>
                             </li>
                             <li>You can now create a custom message.
                                 <pre><code class="language-bash">code SensorData.msg</code></pre>
@@ -266,10 +266,10 @@ source install/setup.bash</code></pre>
 float32 pressure
 string status</code></pre>
                             </li>
-                            <li>We should now modify CMakeLists.txt.
+                            <li>We should now modify <code class="inline-code-normal">CMakeLists.txt</code>.
                                 The <code class="inline-code-normal">rosidl_default_generators</code> dependency is mandatory because it is responsible for creating the custom message.
                                 <pre><code class="language-text">cmake_minimum_required(VERSION 3.8)
-project(my_custom_msgs)
+project(b_messages)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(-Wall -Wextra -Wpedantic)
@@ -299,12 +299,11 @@ endif()
 ament_package()
                                 </code></pre>
                             </li>
-                            <li>Modify the package.xml.
-                                The dependencies are the same for this file.
+                            <li>Modify the <code class="inline-code-normal">package.xml</code>. The dependencies are the same for this file.
                                 <pre><code class="language-xml">&lt;?xml version="1.0"?&gt;
 &lt;?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?&gt;
 &lt;package format="3"&gt;
-    &lt;name&gt;my_custom_msgs&lt;/name&gt;
+    &lt;name&gt;b_messages&lt;/name&gt;
     &lt;version&gt;0.0.0&lt;/version&gt;
     &lt;description&gt;Custom message definitions for ROS 2&lt;/description&gt;
     &lt;maintainer email="mhiky@todo.todo"&gt;mhiky&lt;/maintainer&gt;
@@ -328,25 +327,24 @@ ament_package()
                             </li>
                             <li>Build the package and source the setup file.
                                 <pre><code class="language-bash">cd ~/ros2_ws
-colcon build --packages-select my_custom_msgs
+colcon build --packages-select b_messages
 
 source install/setup.bash</code></pre>
                             </li>
                             <li>We can now create a new publisher using our new custom message.
                                 Create new ROS 2 package.
                                 <pre><code class="language-bash">ros2 pkg create --build-type ament_python my_custom_pub</code></pre>
-                                Inside my_custom_pub, modify <code class="inline-code-normal">setup.py</code> to include the message package.
+                                Inside <code class="inline-code-normal">my_custom_pub</code>, modify <code class="inline-code-normal">setup.py</code> to include the message package.
                                 <pre><code class="language-python">entry_points={
     'console_scripts': [
         'sensor_publisher = my_custom_pub.sensor_publisher:main',
     ],
-},
-                                </code></pre>
+},</code></pre>
                             </li>
-                            <li>Create a Python publisher script inside ros2_ws/src/my_cutom_pub/my_custom_pub, name it as sensor_publisher.py
+                            <li>Create a Python publisher script inside <code class="inline-code-normal">ros2_ws/src/my_cutom_pub/my_custom_pub</code>, name it as <code class="inline-code-normal">sensor_publisher.py</code> 
                                 <pre><code class="language-python">import rclpy
 from rclpy.node import Node
-from my_custom_msgs.msg import SensorData
+from b_messages.msg import SensorData
 import random
 
 class SensorPublisher(Node):
@@ -383,8 +381,7 @@ source install/setup.bash</code></pre>
                             </li>
                             <li>Run the publisher in a new terminal.
                                 <pre><code class="language-bash">source install/setup.bash
-ros2 run my_custom_pub sensor_publisher
-                                </code></pre>
+ros2 run my_custom_pub sensor_publisher</code></pre>
                                 The terminal should look like the image below.
                                 <img src="img/asset_33.png" alt="" class="screenshot">
                             </li>
@@ -395,7 +392,19 @@ ros2 run my_custom_pub sensor_publisher
             <div class="content-content">
                 <div class="content-h2">Deeper Look at Nabi</div>
                 <div class="content-division">
-                    <div class="content-division-title">Content Title 1</div>
+                    <div class="content-division-title">Nodes</div>
+                    <div class="content-division-content">
+                    Content 1
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Messages</div>
+                    <div class="content-division-content">
+                    Content 1
+                    </div>
+                </div>
+                <div class="content-division">
+                    <div class="content-division-title">Topics</div>
                     <div class="content-division-content">
                     Content 1
                     </div>
@@ -404,20 +413,31 @@ ros2 run my_custom_pub sensor_publisher
             <div class="content-content">
                 <div class="content-h2">Assignment</div>
                 <div class="content-division">
-                    <div class="content-division-title">Content Title 1</div>
-                    <div class="content-division-content">
                     <ol>
-                        <li>Create a custom message named CustomMsg.msg that includes:
-                            <ol>
-                                <li>string</li>
-                                <li>int32</li>
-                                <li>float32</li>
-                            </ol>
+                        <li>Create three (3) nodes in your <code class="inline-code-normal">arm_system</code> package called <code>arm_node.py</code>, <code>vision_node.py</code>, and <code>voice_node.py</code>.</li>
+                        <li>Create <code class="inline-code-normal">msg</code> directory in your <code class="inline-code-normal">arm_interfaces</code> package. Then, create <code>Command.msg</code> and <code>Object.msg</code>. Follow the data type provided below.
+                            <br><br><code class="inline-code-normal">Command.msg</code>
+                            <ul>
+                                <li><code>string text</code></li>
+                                <li><code>string intent</code></li>
+                            </ul>
+                            <code class="inline-code-normal">Object.msg</code>
+                            
+                            <ul>
+                                <li><code>string label</code></li>
+                                <li><code>float32 confidence</code></li>
+                            </ul>
                         </li>
-                        <li>Create a publisher node to send these messages.</li>
-                        <li>Create a subscriber node to receive and process these messages.</li>
+                        <li>Create the following topics to allow each node to communicate with each other. Make sure that you have your <code class="inline-code-normal">arm_interfaces</code> built by <code class="inline-code-normal">colcon</code> and you added that package to <code class="inline-code-normal">exec_depend</code> on your <code class="inline-code-normal">arm_system</code> package for this to work. You will be using the messages you built earlier to make this work.
+                            <ul>
+                                <li><code class="inline-code-normal">/command</code> - published by voice node and subscribed by arm node. This must use the custom <code>Command.msg</code> message.</li>
+                                <li><code class="inline-code-normal">/objects_detected</code> - published by vision node and subscribed by arm node. This must use the custom <code>Object.msg</code> message.</li>
+                                <li><code class="inline-code-normal">/arm_status</code> - published by arm node and subscribed by both vision and voice nodes. This must use a basic bool type.</li>
+                            </ul>
+                        </li>
+                        <li>The logic must follow a basic sequential event. A user will input a command and the voice node determines the intent of the command. For example, the user wants the robot to pick up an apple, the voice node parses the action called "pick" and the target object called "apple". From there, the vision node determines if the current target object is there and if it is, the arm node will proceed to the desired action. Add additional logic where the arm will throw an error if the target object is not present.</li>
+                        <li>Commit it to GitHub with the message “A3 added nodes, messages, and topics" then push. Make sure you only have a single branch.</li>
                     </ol>
-                    </div>
                 </div>
             </div>
         </div>

@@ -182,14 +182,18 @@ ros2 run action_client_pkg rotate_turtle</code></pre>
                 <div class="content-h2">Assignment</div>
                 <div class="content-division">
                     <ol>
-                        <li>Modify the action client to:
-                            <ol type="A">
-                                <li>Accept user input for the rotation angle.</li>
-                                <li>Print real-time feedback until the goal is completed.</li>
-                            </ol>
+                        <li>Create a custom action <code class="inline-code-normal">MoveArm.action</code> which moves the arm from one position to another with feedback and result.
+                            <pre><code class="language-cpp">string task_description
+string target_object
+---
+bool success
+string final_state
+---
+string current_stage
+float32 progress_percentage</code></pre>
                         </li>
-                        <li>Implement an action server that moves the turtle in a square pattern.</li>
-                        <li>Implement goal cancellation before the rotation is completed.</li>
+                        <li>Implement a progress feedback function where the progress (current stage and progress percentage) is printed until the final state is reached.</li>
+                        <li>Commit it to GitHub with the message “A8 added actions” then push. Make sure you only have a single branch.</li>
                     </ol>
                 </div>
             </div>
