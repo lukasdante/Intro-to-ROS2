@@ -161,7 +161,7 @@ if __name__ == '__main__':
     main()</code></pre>
                             </li>
                             <li>Make the script executable by giving it permission.
-                                <pre><code class="language-bash">chmod +x param_node.py</code></pre>
+                                <pre><code class="language-bash">chmod +x ~/ros2_ws/src/c_parameters/c_parameters/param_node.py</code></pre>
                                 Open <code class="inline-code-normal">setup.py</code> to add the executable.
                                 <pre><code class="language-bash">code ~/ros2_ws/src/c_parameters/setup.py</code></pre>
                                 Modify the entry points as follows:
@@ -204,8 +204,7 @@ source install/setup.bash</code></pre>
                     <div class="content-division-title">Parameters</div>
                     <div class="content-division-content">We employed ROS 2 parameters for defining the characteristics of each node. With this, we can simply change the parameter values dynamically in the launch file (we will discuss more of this next module) or during runtime. The choice of parameters are inherently tied with the purpose of the node, for example, the writer node has parameters for the language used, the encoding format, and the sample rate of the audio waveform. </div>
                     <div class="content-division-content">The parameters below are the outputs when launching the entire system and running <code class="inline-code-normal">ros2 param list</code>. There are parameters for the other joint axes as well but we removed it for the sake of readability.</div>
-                    <div class="content-division-content"><pre><code class="language-bash">
-/actor/G:
+                    <div class="content-division-content"><pre><code class="language-bash">/actor/G:
   axis
   baud_rate
   close_limit

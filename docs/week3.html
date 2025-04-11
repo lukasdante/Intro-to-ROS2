@@ -241,7 +241,8 @@ source install/setup.bash</code></pre>
                                 <img src="img/asset_32.png" alt="" class="screenshot">
                             </li>
                             <li>Run the listener node in a separate terminal.
-                                <pre><code class="language-bash">ros2 run a_nodes listener</code></pre>
+                                <pre><code class="language-bash">source install/setup.bash
+ros2 run a_nodes listener</code></pre>
                                 The result should like the image below.
                                 <img src="img/asset_31.png" alt="" class="screenshot">
                             </li>
@@ -253,7 +254,8 @@ source install/setup.bash</code></pre>
                     <div class="content-division-content">
                         <ol>
                             <li>Create a separate package under your workspace for the custom messages.
-                                <pre><code class="language-bash">ros2 pkg create --build-type ament_cmake b_messages</code></pre>
+                                <pre><code class="language-bash">cd ~/ros2_ws/src
+ros2 pkg create --build-type ament_cmake b_messages</code></pre>
                                 You can see that we used <code class="inline-code-normal">ament_cmake</code> as our build type here. This is because you cannot create custom interfaces like messages with a Python package.
                             </li>
                             <li>Create a <code class="inline-code-normal">msg</code> directory where messages will be stored.
@@ -332,13 +334,8 @@ source install/setup.bash</code></pre>
                             </li>
                             <li>We can now create a new publisher using our new custom message.
                                 Create new ROS 2 package.
-                                <pre><code class="language-bash">ros2 pkg create --build-type ament_python my_custom_pub</code></pre>
-                                Inside <code class="inline-code-normal">my_custom_pub</code>, modify <code class="inline-code-normal">setup.py</code> to include the message package.
-                                <pre><code class="language-python">entry_points={
-    'console_scripts': [
-        'sensor_publisher = my_custom_pub.sensor_publisher:main',
-    ],
-},</code></pre>
+                                <pre><code class="language-bash">cd ~/ros2_ws/src
+ros2 pkg create --build-type ament_python my_custom_pub</code></pre>
                             </li>
                             <li>Create a Python publisher script inside <code class="inline-code-normal">ros2_ws/src/my_cutom_pub/my_custom_pub</code>, name it as <code class="inline-code-normal">sensor_publisher.py</code> 
                                 <pre><code class="language-python">import rclpy
@@ -372,6 +369,13 @@ if __name__ == '__main__':
                                 Make it an executable file to successfully run it.
                                 <pre><code class="language-bash">chmod +x ~/ros2_ws/src/my_custom_pub/my_custom_pub/sensor_publisher.py</code></pre>
                             </li>
+                            <li>Edit the entry points of our script in <code>setup.py</code>.
+                                Inside <code class="inline-code-normal">my_custom_pub</code>, modify <code class="inline-code-normal">setup.py</code> to include the message package.
+                                <pre><code class="language-python">entry_points={
+    'console_scripts': [
+        'sensor_publisher = my_custom_pub.sensor_publisher:main',
+    ],
+},</code></pre></li>
                             <li>
                                 Build the new package you created.
                                 <pre><code class="language-bash">cd ~/ros2_ws
