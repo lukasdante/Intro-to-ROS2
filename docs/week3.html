@@ -296,8 +296,7 @@ if(BUILD_TESTING)
     ament_lint_auto_find_test_dependencies()
 endif()
 
-ament_package()
-                                </code></pre>
+ament_package()</code></pre>
                             </li>
                             <li>Modify the <code class="inline-code-normal">package.xml</code>. The dependencies are the same for this file.
                                 <pre><code class="language-xml">&lt;?xml version="1.0"?&gt;
@@ -394,19 +393,61 @@ ros2 run my_custom_pub sensor_publisher</code></pre>
                 <div class="content-division">
                     <div class="content-division-title">Nodes</div>
                     <div class="content-division-content">
-                    Content 1
+                        Developing Nabi requires several nodes to work alongside each other. These nodes should have the ability to communicate, respond, and interact to fully make the robot move with all of its features. Designing the architecture for Nabi is pretty straightforward, there are nodes that are responsible for low-level control such as the joints, gripper, and an orchestrator. Some nodes are responsible for the conversational agent which are the agent itself, the transcriber, the talker, and the recorder nodes. Computer vision is handled by an observer node, we only support object detection for now, but 6D pose estimation or vision language models can be added as a feature. Lastly, we incorporated a manager node that manages the lifecycle and availability of these nodes.
+                    </div>
+                    <div class="content-division-content">The nodes below are the outputs when launching the entire system and running <code class="inline-code-normal">ros2 node list</code>.</div>
+                    <div class="content-division-content">
+                        <pre><code class="language-bash">/actor/A
+/actor/B
+/actor/C
+/actor/G
+/actor/X
+/actor/Y
+/actor/Z
+/actor/actor
+/agent
+/manager
+/observer
+/recorder
+/talker
+/writer</code></pre>
                     </div>
                 </div>
                 <div class="content-division">
                     <div class="content-division-title">Messages</div>
                     <div class="content-division-content">
-                    Content 1
+                    We deem that ROS 2 messages are pretty limited in functionality, especially now that we deal with complex data structures like audio waveforms. In dealing with this, we simply serialized the audio by encoding it in <code>base64</code> and pass it a <code>String</code> variable. However, we implemented custom messages in an attempt to optimize the topics, but we realized this is actually bad design because we are sending unused data for most of the nodes. 
+                    </div>
+                    <div class="content-division-content">The message below is the <code>Response.msg</code> which is used for sending coupled data of the agent response and parameters.</div>
+                    <div class="content-division-content">
+                        <pre><code class="language-bash">string response
+string parameters</code></pre>
                     </div>
                 </div>
                 <div class="content-division">
                     <div class="content-division-title">Topics</div>
                     <div class="content-division-content">
-                    Content 1
+                    Since we have several nodes working together, it must be obvious that there are several topics that allow these nodes to communicate with each other. These nodes utilize built-in message interfaces to communicate with each other. We will see how these topics are tied to nodes and the publisher-subscriber architecture when we run <code class="inline-code-normal">rqt_graph</code>. We will talk about RQT graphs in Week 6.
+                    </div>
+                    <div class="content-division-content">
+                    The topics below are the outputs when launching the entire system and running <code class="inline-code-normal">ros2 topic list</code>
+                    </div>
+                    <div class="content-division-content">
+                        <pre><code class="language-bash">/actor/conversation/parameters
+/actor/joint/joint_data
+/conversation/parameters
+/conversation/recording
+/conversation/reset
+/conversation/response
+/conversation/transcript
+/conversation/volume
+/manager/node_status
+/manager/nodes_initialized
+/observation/classes
+/observation/image
+/observation/oneshot_response
+/parameter_events
+/rosout</code></pre>
                     </div>
                 </div>
             </div>

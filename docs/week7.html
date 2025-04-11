@@ -97,13 +97,13 @@ int64 sum</code></pre>
                             <li>Open a terminal and navigate to your ROS 2 workspace's src directory.
                                 <pre><code class="language-bash">cd ~/ros2_ws/src</code></pre>
                             </li>
-                            <li>Create a new package named my_service_pkg with Python build type and necessary dependencies.
-                                <pre><code class="language-bash">ros2 pkg create --build-type ament_python my_service_pkg --dependencies rclpy example_interfaces</code></pre>
+                            <li>Create a new package named e_services with Python build type and necessary dependencies.
+                                <pre><code class="language-bash">ros2 pkg create --build-type ament_python e_services --dependencies rclpy example_interfaces</code></pre>
                                 This command generates the package structure and specifies dependencies like rclpy (ROS 2 Python client library) and example_interfaces (which provides standard service definitions).
                             </li>
                             <li>
-                                And then, create a Service Server Node. Inside the my_service_pkg package, create a Python script for the service server. Navigate to the package directory and create a service_server.py file.
-                                <pre><code class="language-bash">cd ~/ros2_ws/src/my_service_pkg/my_service_pkg 
+                                And then, create a Service Server Node. Inside the e_services package, create a Python script for the service server. Navigate to the package directory and create a service_server.py file.
+                                <pre><code class="language-bash">cd ~/ros2_ws/src/e_services/e_services 
 code service_server.py</code></pre>
                             </li>
                             <li>Open service_server.py and implement the service server.
@@ -199,21 +199,21 @@ if __name__ == '__main__':
                             <li>Afterwards, modify the <code class="inline-code-normal">setup.py</code>. Update the <code class="inline-code-normal">setup.py</code> file to include the new executables. Open <code class="inline-code-normal">setup.py</code> and modify the entry_points section.
                                 <pre><code class="language-python">entry_points={
     'console_scripts': [
-        'service_server = my_service_pkg.service_server:main',
-        'service_client = my_service_pkg.service_client:main',
+        'service_server = e_services.service_server:main',
+        'service_client = e_services.service_client:main',
     ],
 },</code></pre>
                             </li>
                             <li>Now, build a package. Return to the root of your workspace and build the package using colcon:
                                 <pre><code class="language-bash">cd ~/ros2_ws
-colcon build --packages-select my_service_pkg
+colcon build --packages-select e_services
 source install/setup.bash</code></pre>
                             </li>
                             <li>Run the Service Server and Client. Open a terminal and run the service server.
-                                <pre><code class="language-bash">ros2 run my_service_pkg service_server</code></pre>
+                                <pre><code class="language-bash">ros2 run e_services service_server</code></pre>
                             </li>
                             <li>In another terminal, run the service client with two integer arguments.
-                                <pre><code class="language-bash">ros2 run my_service_pkg service_client 3 5</code></pre>
+                                <pre><code class="language-bash">ros2 run e_services service_client 3 5</code></pre>
                                 The client will provide a request to add 3 and 5, and the server will respond with the sum, displaying the result in the client's terminal. 
                             </li>
                         </ol>

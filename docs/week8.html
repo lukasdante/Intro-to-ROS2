@@ -95,8 +95,8 @@
                         <ol>
                             <li>Create a ROS 2 package and navigate into it.
                                 <pre><code class="language-bash">cd ~/ros2_ws/src
-ros2 pkg create --build-type ament_python action_client_pkg
-cd action_client_pkg</code></pre>
+ros2 pkg create --build-type ament_python f_action
+cd f_action</code></pre>
                             </li>
                             <li>Create the directory and a file for the action script.
                                 <pre><code class="language-bash">mkdir -p action
@@ -151,13 +151,13 @@ if __name__ == '__main__':
                                 <pre><code class="language-bash">code setup.py</code></pre>
                                 <pre><code class="language-python">entry_points={
     'console_scripts': [
-        'rotate_turtle = action_client_pkg.action_client:main',
+        'rotate_turtle = f_action.action_client:main',
     ],
 },</code></pre>
                             </li>
                             <li>Build the ROS 2 workspace including the new package.
                                 <pre><code class="language-bash">cd ~/ros2_ws
-colcon build --packages-select action_client_pkg
+colcon build --packages-select f_action
 source install/setup.bash</code></pre>
                             </li>
                             <li>Then run the action client by first running the turtelsim_node.
@@ -165,7 +165,7 @@ source install/setup.bash</code></pre>
                             </li>
                             <li>Open another terminal to run your action client.
                                 <pre><code class="language-bash">source install/setup.bash
-ros2 run action_client_pkg rotate_turtle</code></pre>
+ros2 run f_action rotate_turtle</code></pre>
                             </li>
                         </ol>
                     </div>

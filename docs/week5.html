@@ -82,7 +82,8 @@
                     <div class="content-division-content">
                         <ol>
                             <li>Create a ROS 2 package by navigating to your workspace and running the code below.
-                                <pre><code class="language-bash">ros2 pkg create --build-type ament_python emtech</code></pre>
+                                <pre><code class="language-bash">cd /ros2_ws/src
+ros2 pkg create --build-type ament_python d_launch</code></pre>
                                 This will generate the necessary structure but it does not contain a launch directory by default. Now, manually create a launch folder inside your package:
                                 <pre><code class="language-bash">mkdir launch</code></pre>
                                 Create a new python file in the launch directory of your package:
@@ -118,16 +119,16 @@ def generate_launch_description():
     ])</code></pre>
                                 This launch file starts with two nodes: a talker node that publishes messages and a listener node that subscribes to those messages.
                                 Ensure that your python file is executable:
-                                <pre><code class="language-bash">chmod +x ~/ros2_ws/src/emtech/launch/my_launch.py</code></pre>
+                                <pre><code class="language-bash">chmod +x ~/ros2_ws/src/d_launch/launch/my_launch.py</code></pre>
                             </li>
                             <li>Build the package and go to ROS 2 workspace directory.
                                 <pre><code class="language-bash">cd ~/ros2_ws
-colcon build --packages-select emtech
+colcon build --packages-select d_launch
 source ~/ros2_ws/install/setup.bash
                                 </code></pre>
                             </li>
                             <li>Run your launch file.
-                                <pre><code class="language-bash">ros2 launch emtech my_launch.py</code></pre>
+                                <pre><code class="language-bash">ros2 launch d_launch my_launch.py</code></pre>
                             </li>
                         </ol>
                     </div>
@@ -147,8 +148,8 @@ source ~/ros2_ws/install/setup.bash
 )</code></pre>
                             </li>
                             <li>Rebuild the package and run the launch file.
-                                <pre><code class="language-bash">colcon build --packages-select emtech
-ros2 launch emtech my_launch.py</code></pre>
+                                <pre><code class="language-bash">colcon build --packages-select d_launch
+ros2 launch d_launch my_launch.py</code></pre>
                                 You can notice that the talker node now publishes messages at a slower rate. It is because of the parameter you set on the talker_node.
                             </li>
                         </ol>
