@@ -20,8 +20,8 @@
         </div>
         
         <div class="left-block-panel">
-            <div class="author-name">John Louis D. Lagramada</div>
-            <div class="author-email"><a href="mailto:johnlouis.dante@gmail.com">johnlouis.dante@gmail.com</a></div>
+            <div class="author-name">NabiTech</div>
+            <div class="author-email"><a href="mailto:nabitechthesis@gmail.com">nabitechthesis@gmail.com</a></div>
         </div>
         <hr class="left-panel-divider">
         <div class="left-block-panel">
@@ -33,7 +33,6 @@
             <div class="course"><a href="week5.html"><span class="course-week-no"></span>Custom Launch</a></div>
             <div class="course"><a href="week6.html"><span class="course-week-no"></span>Common ROS 2 Packages</a></div>
             <div class="course"><a href="week7.html"><span class="course-week-no"></span>Services</a></div>
-            <div class="course"><a href="week8.html"><span class="course-week-no"></span>Actions</a></div>
         </div>
         <hr class="left-panel-divider">
         <div class="left-block-panel">
@@ -139,8 +138,9 @@
             <div class="content-content">
                 <div class="content-h2">Deeper Look at Nabi</div>
                 <div class="content-division">
-                    <div class="content-division-title">Content Title 1</div>
-                    <div class="content-division-content">Content 1</div>
+                    <div class="content-division-title">ROS Graph of Nabi</div>
+                    <div class="content-division-content">Remember the custom launch file we created to run the entire ROS system? It includes several interconnected nodes that work together to handle the conversation flow between the agent, actor modules, and supporting components. In Nabi, we used rqt_graph to visualize these connections, allowing us to see which nodes are publishing or subscribing to specific topics. As you can see in this diagram, the /conversation node plays a central role, managing parameters, responses, transcripts, and recordings, with input from nodes like /agent, /writer, and /talker. Meanwhile, the /actor namespace encapsulates multiple submodules such as /actor/B, /actor/Y, and so on, each likely representing a unique behavioral model or persona. The topic /actor/conversation/parameters acts as the main communication bridge for initiating interaction with specific actors. This visual representation is extremely helpful for debugging—especially when ensuring all dependencies are launched properly and topics are correctly routed. It also offers a clear overview of how modular components interact within the system, reinforcing best practices in ROS architecture design.</div>
+                    <div class="content-division-content"><img src="img/rqt_graph.png" class="screenshot" alt=""></div>
                 </div>
             </div>
             <div class="content-content">

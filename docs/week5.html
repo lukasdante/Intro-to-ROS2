@@ -20,8 +20,8 @@
         </div>
         
         <div class="left-block-panel">
-            <div class="author-name">John Louis D. Lagramada</div>
-            <div class="author-email"><a href="mailto:johnlouis.dante@gmail.com">johnlouis.dante@gmail.com</a></div>
+            <div class="author-name">NabiTech</div>
+            <div class="author-email"><a href="mailto:nabitechthesis@gmail.com">nabitechthesis@gmail.com</a></div>
         </div>
         <hr class="left-panel-divider">
         <div class="left-block-panel">
@@ -33,7 +33,6 @@
             <div class="course"><a href="week5.html"><span class="course-week-no"></span>Custom Launch</a></div>
             <div class="course"><a href="week6.html"><span class="course-week-no"></span>Common ROS 2 Packages</a></div>
             <div class="course"><a href="week7.html"><span class="course-week-no"></span>Services</a></div>
-            <div class="course"><a href="week8.html"><span class="course-week-no"></span>Actions</a></div>
         </div>
         <hr class="left-panel-divider">
         <div class="left-block-panel">
@@ -159,8 +158,101 @@ ros2 launch d_launch my_launch.py</code></pre>
             <div class="content-content">
                 <div class="content-h2">Deeper Look at Nabi</div>
                 <div class="content-division">
-                    <div class="content-division-title">Content Title 1</div>
-                    <div class="content-division-content">Content 1</div>
+                    <div class="content-division-title">Conversational Agent Launch</div>
+                    <div class="content-division-content">Nabi has two (2) custom launch files that are used extensively for debugging and demonstration. The first one is audio_launch.py which is the launch file for running the text-to-speech (talker), speech-to-text (writer), recorder, large language model (agent), and vision (observer) nodes. You can see here that it is possible to set parameters in ROS 2 in a launch file without altering the code directly.</div>
+                    <div class="content-division-content"><pre><code class="language-python">from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        Node(
+            package='aiagent',
+            executable='talker',
+            name='talker',
+        ),
+        Node(
+            package='aiagent',
+            executable='recorder',
+            name='recorder',
+            parameters=[
+                {'threshold': 5000},
+            ]
+        ),
+        Node(
+            package='aiagent',
+            executable='writer',
+            name='writer'
+        ),
+        Node(
+            package='aiagent',
+            executable='agent',
+            name='agent'
+        ),
+        Node(
+            package='vision',
+            executable='observer',
+            name='observer',
+        ),
+        Node(
+            package='utils',
+            executable='manager',
+            name='manager',
+            parameters=[
+                {'nodes': 'talker,recorder,writer,agent,observer,manager'}
+            ]
+        )
+    ])</code></pre></div>
+                </div>
+                                <div class="content-division">
+                    <div class="content-division-title">Main Launch</div>
+                    <div class="content-division-content">The second one is main_launch.py which is used to run all the nodes including the controller (actor), and the individual joint nodes for axes X, Y, Z, A, B, C, and G. A namespace is used in the actor node because this node is a composition of other nodes. As you can see, both launch files also include a manager node that managers the entire system's nodes lifecycles.</div>
+                    <div class="content-division-content"><pre><code class="language-python">from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        Node(
+            package='aiagent',
+            executable='talker',
+            name='talker',
+        ),
+        Node(
+            package='cancontrol',
+            executable='actor',
+            namespace='actor',
+        ),
+        Node(
+            package='aiagent',
+            executable='recorder',
+            name='recorder',
+            parameters=[
+                {'threshold': 5000},
+            ]
+        ),
+        Node(
+            package='aiagent',
+            executable='writer',
+            name='writer'
+        ),
+        Node(
+            package='aiagent',
+            executable='agent',
+            name='agent'
+        ),
+        Node(
+            package='vision',
+            executable='observer',
+            name='observer',
+        ),
+        Node(
+            package='utils',
+            executable='manager',
+            name='manager',
+            parameters=[
+                {'nodes': 'talker,actor,recorder,writer,agent,observer,manager,X,Y,Z,A,B,C,G'}
+            ]
+        )
+    ])</code></pre></div>
                 </div>
             </div>
             <div class="content-content">

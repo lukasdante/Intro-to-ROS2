@@ -20,8 +20,8 @@
         </div>
         
         <div class="left-block-panel">
-            <div class="author-name">John Louis D. Lagramada</div>
-            <div class="author-email"><a href="mailto:johnlouis.dante@gmail.com">johnlouis.dante@gmail.com</a></div>
+            <div class="author-name">NabiTech</div>
+            <div class="author-email"><a href="mailto:nabitechthesis@gmail.com">nabitechthesis@gmail.com</a></div>
         </div>
         <hr class="left-panel-divider">
         <div class="left-block-panel">
@@ -33,7 +33,6 @@
             <div class="course"><a href="week5.html"><span class="course-week-no"></span>Custom Launch</a></div>
             <div class="course"><a href="week6.html"><span class="course-week-no"></span>Common ROS 2 Packages</a></div>
             <div class="course"><a href="week7.html"><span class="course-week-no"></span>Services</a></div>
-            <div class="course"><a href="week8.html"><span class="course-week-no"></span>Actions</a></div>
         </div>
         <hr class="left-panel-divider">
         <div class="left-block-panel">
@@ -223,8 +222,24 @@ source install/setup.bash</code></pre>
             <div class="content-content">
                 <div class="content-h2">Deeper Look at Nabi</div>
                 <div class="content-division">
-                    <div class="content-division-title">Content Title 1</div>
-                    <div class="content-division-content">Content 1</div>
+                    <div class="content-division-title">Talker Service</div>
+                    <div class="content-division-content">In our ROS system, the Talker node acts as a central module that handles text-to-speech (TTS) functionality. Instead of relying solely on the usual publish-subscribe setup, we added a ROS 2 service to let other nodes—like a vision node—send text directly to the Talker for vocalization. This approach makes Talker more flexible and reusable, since it exposes a clean interface for triggering speech. The service is simple: it takes a string of text and returns a boolean to indicate whether the speech was successfully executed. Using a service here is great for cases where you need a clear, one-time response. It also keeps things modular—nodes don’t need to know how the TTS works, just that it does. This setup helps keep the codebase cleaner, easier to test, and easier to maintain as the system grows. Here’s how the service part of Talker is implemented.</div>
+                    <div class="content-division-content"><pre><code class="language-cpp">string text
+---
+bool success</code></pre>
+</div>
+                    <div class="content-division-content">The code below shows how we implemented this simple service. The node method for talk function is recycled and reused in fulfillment of the service. The custom interface called TalkString is used to allow taking of inputs and producing a boolean response in return. </div>
+                    <div class="content-division-content"><pre><code class="language-python">from interfaces.srv import TalkString
+
+# Inside Talker.__init__()
+self.srv = self.create_service(TalkString, 'talk', self.talk_srv)
+
+# Callback function
+def talk_srv(self, request, response):
+    response.success = self.talk(request.text)
+    self.get_logger().info(f'Incoming request received by Talker: {request.text}')
+    return response
+</code></pre></div>
                 </div>
             </div>
             <div class="content-content">
